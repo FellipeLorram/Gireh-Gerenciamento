@@ -1,0 +1,48 @@
+<%- include('includes/head') %>
+    <%- include('includes/nav') %>
+    
+    <section class="espacamento"></section>
+
+    <div class="container">
+            <div class="row">
+                <div class="col-lg-2"></div>
+
+                <div class="col-lg-8 my-3">
+                    <h1 class="text-center">Criar novo usuário</h1>
+                   
+                    <%- include('includes/messages') %>
+
+                    <div class="row">
+                        <div class="col-lg"></div>
+                        <div class="col-lg">
+                            <form class="my-5" action="/cadastro/register" method="POST">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">E-mail</label>
+                                    <input type="text" class="form-control" name="email">
+                                    <div id="emailHelp" class="form-text">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Senha</label>
+                                    <input type="password" class="form-control" name="password">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Código cadastro</label>
+                                    <input type="text" class="form-control" name="codigoAcesso">
+                                </div>
+                                <button type="submit" class="btn btn-primary my-2">Criar usuário</button>
+                            </form>
+                        </div>
+                        <div class="col-lg"></div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-2"></div>
+            </div>
+        </div>
+
+
+
+        <%- include('includes/footer') %>

@@ -1,0 +1,152 @@
+<%- include('includes/head') %>
+  <nav>
+    <div class="navbar">
+      <i class='bx bx-menu'></i>
+      <div class="logo"><a href="/">Ótica Girêh</a></div>
+      <div class="nav-links">
+        <div class="sidebar-logo">
+          <span class="logo-name">Ótica Girêh</span>
+          <i class='bx bx-x'></i>
+        </div>
+        <ul class="links">
+          <% if(user){%>
+            <li>
+              <a class="servicoMostra" href="#">SERVIÇOS</a>
+              <i class='bx bxs-chevron-down htmlcss-arrow arrow  '></i>
+              <ul class="htmlCss-sub-menu sub-menu">
+                <li><a href="/servicos/index">Nova Venda</a></li>
+                <li><a href="/">Lista de Vendas</a></li>
+                <li class="more">
+                  <span><a class="mostraMais" href="#">Concertos</a>
+                    <i class='bx bxs-chevron-right arrow more-arrow'></i>
+                  </span>
+                  <ul class="more-sub-menu sub-menu">
+                    <li><a href="/concerto/novo-concerto">Novo Concerto</a></li>
+                    <li><a href="/concertos/concertos">Lista de Concertos</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a class="exameMOstra" href="#">EXAME</a>
+              <i class='bx bxs-chevron-down js-arrow arrow '></i>
+              <ul class="js-sub-menu sub-menu">
+                <li><a href="/fichas/index">Nova Ficha Optométrica</a></li>
+                <li><a href="/fichas/fichas">Fichas Optométricas</a></li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="/ferramentas/index">FERRAMENTAS</a>
+              <i class='bx bxs-chevron-down js-arrow1 arrow '></i>
+              <ul class="js-sub-menu1 sub-menu">
+                <li><a href="/ferramentas/lista-lentes">Listagem Lentes</a></li>
+                <li><a href="/relatorios/index">Relatórios</a></li>
+                <li><a href="#">Custos</a></li>
+              </ul>
+            </li>
+
+            <li><a href="/login/logout">SAIR</a></li>
+
+
+
+        </ul>
+      </div>
+      <form action="/servicos/pesquisa" method="GET">
+        <div class="search-box">
+          <i class='bx bx-search'></i>
+          <div class="input-box">
+            <input type="text" name="nomePesquisa" placeholder="Pesquisar...">
+          </div>
+        </div>
+      </form>
+      <%}else{%>
+        <li><a href="/login/index">ENTRAR</a></li>
+        </ul>
+        <%}%>
+
+    </div>
+  </nav>
+
+  <section class="espacamento"></section>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2"></div>
+
+      <div class="col-lg-8 my-3">
+
+        <%- include('includes/messages') %>
+
+          <h1 class="text-center my-5">Serviços</h1>
+
+          <h3 class="text-center my-5">Busca por "<%= servicos.pesquisa%>"</h3>
+
+          <% if(servicos.length> 0){%>
+            <table class="table">
+              <thead class="thead">
+                <tr>
+                  <th>Data</th>
+                  <th>Nome</th>
+                  <th>Total</th>
+                  <th>Situação</th>
+                  <th>Entrega</th>
+                  <th>Deletar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% servicos.forEach(servico=> { %>
+                  <tr>
+                    <td data-label="Data">
+                      <%=servico.CriadoEm.getDate()%>/<%=servico.CriadoEm.getMonth() + 1%>/
+                          <%=servico.CriadoEm.getFullYear() %>
+                    </td>
+
+                    <td data-label="Nome">
+                      <a class="NomeIndex" href="/servicos/index/<%=servico._id%>">
+                        <%= servico.nome %>
+                      </a>
+                    </td>
+
+                    <% if(servico.total=='' ){ %>
+                      <td data-label="Total"> Não Preenchido </td>
+                      <% }else{ %>
+                        <td data-label="Total">
+                          <%=servico.total%>
+                        </td>
+                        <% } %>
+
+
+                          <%if(servico.pago=='Pago' ){%>
+                            <td data-label="Situação" style="color: rgb(0, 121, 0);">Pago</td>
+                            <%} else {%>
+                              <td data-label="Situação" class="text-danger">A Pagar</td>
+                              <%} %>
+
+                                <%if(servico.entregue=='Entregue' ){%>
+                                  <td data-label="Situação" style="color: rgb(0, 121, 0);">Entregue</td>
+                                  <%} else {%>
+                                    <td data-label="Situação" class="text-danger">A Entregar</td>
+                                    <%} %>
+
+                                      <td><a class="btn btn-danger" href="/servicos/delete/<%=servico._id%>">Deletar</a>
+                                      </td>
+                  </tr>
+                  <% });%>
+              </tbody>
+            </table>
+
+            <% } else {%>
+              <p class="text-center lead"> Não encontrado </p>
+              <% }%>
+
+      </div>
+
+      <div class="col-lg-2"></div>
+    </div>
+  </div>
+
+
+
+  <%- include('includes/footer') %>

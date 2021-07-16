@@ -1,0 +1,443 @@
+<%- include('includes/head') %>
+  <nav>
+    <div class="navbar">
+      <i class='bx bx-menu'></i>
+      <div class="logo"><a href="/">Ótica Girêh</a></div>
+      <div class="nav-links">
+        <div class="sidebar-logo">
+          <span class="logo-name">Ótica Girêh</span>
+          <i class='bx bx-x'></i>
+        </div>
+        <ul class="links">
+          <% if(user){%>
+            <li>
+              <a class="servicoMostra" href="#">SERVIÇOS</a>
+              <i class='bx bxs-chevron-down htmlcss-arrow arrow  '></i>
+              <ul class="htmlCss-sub-menu sub-menu">
+                <li><a href="/servicos/index">Nova Venda</a></li>
+                <li><a href="/">Lista de Vendas</a></li>
+                <li class="more">
+                  <span><a class="mostraMais" href="#">Concertos</a>
+                    <i class='bx bxs-chevron-right arrow more-arrow'></i>
+                  </span>
+                  <ul class="more-sub-menu sub-menu">
+                    <li><a href="/concerto/novo-concerto">Novo Concerto</a></li>
+                    <li><a href="/concertos/concertos">Lista de Concertos</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a class="exameMOstra" href="#">EXAME</a>
+              <i class='bx bxs-chevron-down js-arrow arrow '></i>
+              <ul class="js-sub-menu sub-menu">
+                <li><a href="/fichas/index">Nova Ficha Optométrica</a></li>
+                <li><a href="/fichas/fichas">Fichas Optométricas</a></li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="/ferramentas/index">FERRAMENTAS</a>
+              <i class='bx bxs-chevron-down js-arrow1 arrow '></i>
+              <ul class="js-sub-menu1 sub-menu">
+                <li><a href="/ferramentas/lista-lentes">Listagem Lentes</a></li>
+                <li><a href="/relatorios/index">Relatórios</a></li>
+                <li><a href="#">Custos</a></li>
+              </ul>
+            </li>
+
+            <li><a href="/login/logout">SAIR</a></li>
+
+
+
+        </ul>
+      </div>
+      <form action="/servicos/pesquisa" method="GET">
+        <div class="search-box">
+          <i class='bx bx-search'></i>
+          <div class="input-box">
+            <input type="text" name="nomePesquisa" placeholder="Pesquisar...">
+          </div>
+        </div>
+      </form>
+      <%}else{%>
+        <li><a href="/login/index">ENTRAR</a></li>
+        </ul>
+        <%}%>
+
+    </div>
+  </nav>
+  <section class="espacamento"></section>
+
+  <div class="container">
+
+
+    <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8 my-3">
+        <h1 class="text-center">Nova Venda</h1>
+
+        <%- include('includes/messages') %>
+          <%if(servico._id){%>
+            <form class="form-servico my-5 lbB" action="/servicos/edit/<%= servico._id%>" method="POST">
+              <%}else {%>
+                <form class="form-servico my-5" action="/servicos/register" method="POST">
+                  <%}%>
+                    <div class="mb-3">
+                      <label for="nome" class="form-label">Nome</label>
+                      <input value="<%= servico.nome %>" required type="text" class="form-control" name="nome">
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="endereço" class="form-label">Endereço</label>
+                      <input value="<%= servico.endereço%>" type="text" class="form-control" name="endereço">
+                    </div>
+
+                    <div class="mb-5">
+                      <label for="telefone" class="form-label">Telefone</label>
+                      <input value="<%= servico.telefone%>" type="tel" class="form-control" name="telefone">
+                    </div>
+
+                    <h2 class="text-center my-4">Exame</h2>
+                    <p class="text-left lead mb-2 lbB">Olho direito</p>
+
+                    <div class="row g-3 mb-5">
+                      <div class="col">
+                        <label for="esfOd" class="form-label">Esférico</label>
+                        <input value="<%= servico.esfOd%>" type="text" class="form-control" name="esfOd">
+                      </div>
+                      <div class="col">
+                        <label for="cilOd" class="form-label">Cilindrico</label>
+                        <input value="<%= servico.cilOd%>" type="text" class="form-control" name="cilOd">
+                      </div>
+                      <div class="col">
+                        <label for="eixoOd" class="form-label">Eixo</label>
+                        <input value="<%= servico.eixoOd%>" type="text" class="form-control" name="eixoOd">
+                      </div>
+                    </div>
+
+                    <p class="text-left lead mt-5 mb-2 my-3 lbB">Olho Esquerdo</p>
+
+                    <div class="row g-3 mb-5">
+                      <div class="col">
+                        <label for="esfOe" class="form-label">Esférico</label>
+                        <input value="<%= servico.esfOe%>" type="text" class="form-control" name="esfOe">
+                      </div>
+                      <div class="col">
+                        <label for="cilOe" class="form-label">Cilindrico</label>
+                        <input value="<%= servico.cilOe%>" type="text" class="form-control" name="cilOe">
+                      </div>
+                      <div class="col">
+                        <label for="eixoOe" class="form-label">Eixo</label>
+                        <input value="<%= servico.eixoOe%>" type="text" class="form-control" name="eixoOe">
+                      </div>
+                    </div>
+
+                    <p class="text-left lead mt-5 mb-2 lbB" lbB>Perto</p>
+
+                    <div class="mb-5">
+                      <label for="adicao" class="form-label">Adição</label>
+                      <input value="<%= servico.adicao%>" type="text" class="form-control" name="adicao">
+                    </div>
+
+                    <h2 class="text-center my-4">Medidas</h2>
+
+                    <p class="text-left lead mt-5 mb-2 my-3 lbB">Olho Direito</p>
+
+                    <div class="row g-3 mb-5">
+                      <div class="col">
+                        <label for="dnpOd" class="form-label">DNP</label>
+                        <input value="<%= servico.dnpOd%>" type="text" class="form-control" name="dnpOd">
+                      </div>
+                      <div class="col">
+                        <label for="alturaOd" class="form-label">Altura</label>
+                        <input value="<%= servico.alturaOd%>" type="text" class="form-control" name="alturaOd">
+                      </div>
+
+                      <p class="text-left lead mt-5 mb-2 my-3 lbB">Olho Esquerdo</p>
+
+                      <div class="row g-3 mb-5">
+                        <div class="col">
+                          <label for="dnpOe" class="form-label">DNP</label>
+                          <input value="<%= servico.dnpOe%>" type="text" class="form-control" name="dnpOe">
+                        </div>
+                        <div class="col">
+                          <label for="alturaOe" class="form-label">Altura</label>
+                          <input value="<%= servico.alturaOe%>" type="text" class="form-control" name="alturaOe">
+                        </div>
+
+                      </div>
+
+                      <h2 class="text-center my-3">Armação e Lente</h2>
+
+                      <p class="text-left lead lbB">Armação</p>
+
+                      <div class="row g-3 mb-5">
+                        <div class="col">
+                          <label for="armacao" class="form-label">Modelo</label>
+                          <select name="armacao" value="<%= servico.armacao%>" class="form-select">
+                            <option selected>
+                              <%= servico.armacao%>
+                            </option>
+                            <optgroup label="Masculinas">
+                              <option>Life Glasses</option>
+                              <option>Nike</option>
+                              <option>Oakley</option>
+                              <option>Emporio Armani</option>
+                              <option>Fridon</option>
+                              <option>Puma</option>
+                              <option>Ray-Ban</option>
+                              <option>Ferrari</option>
+                              <option>Dulcet</option>
+                              <option>Lacoste</option>
+                            </optgroup>
+                            <optgroup label="Femininas">
+                              <option>Menina Bela</option>
+                              <option>Ana Hickmann</option>
+                              <option>Fridon</option>
+                              <option>Lacoste</option>
+                              <option>Gucci</option>
+                              <option>Vogue</option>
+                              <option>Ray-Ban</option>
+                              <option>Dior</option>
+                              <option>Dulcet</option>
+                            </optgroup>
+                          </select>
+                        </div>
+                        <div class="col">
+                          <label for="valorArm" class="form-label">Valor</label>
+                          <input value="<%= servico.valorArm%>" type="text" class="form-control" name="valorArm">
+                        </div>
+                      </div>
+
+                      <p class="text-left lead lbB">Lente</p>
+
+                      <div class="row g-3 mb-5">
+                        <div class="col">
+                          <label for="lente" class="form-label">Lente</label>
+                          <select name="lente" value="<%= servico.lente%>" class="form-select">
+                            <option selected>
+                              <%= servico.lente%>
+                            </option>
+                            <optgroup label="Visão Simples">
+                            <optgroup label="Resina">
+                              <option>Resina Branca</option>
+                              <option>Resina com Antirreflexo</option>
+                              <option>Resina Blue Cut</option>
+                              <option>Resina Foto com Antirreflexo</option>
+                              <option>Resina Foto Blue Cut</option>
+                              <option>Resina Transitions</option>
+                              <option>Resina Transitions com Antirreflexo</option>
+                            </optgroup>
+                            <optgroup label="Resina Extra Grade">
+                              <option>Resina EXG Branca</option>
+                              <option>Resina EXG com Antirreflexo</option>
+                              <option>Resina EXG Blue Cut</option>
+                              <option>Resina EXG Foto com Antirreflexo</option>
+                              <option>Resina EXG Foto Blue Cut</option>
+                              <option>Resina EXG Transitions</option>
+                              <option>Resina EXG Transitions com Antirreflexo</option>
+                            </optgroup>
+                            <optgroup label="Trivex">
+                              <option>Trivex Branca</option>
+                              <option>Trivex com Antirreflexo</option>
+                              <option>Trivex Blue Cut</option>
+                              <option>Trivex Transitions</option>
+                              <option>Trivex Transitions com Antirreflexo</option>
+                            </optgroup>
+                            <optgroup label="Policarbonato">
+                              <option>Policarbonato Branca</option>
+                              <option>Policarbonato com Antirreflexo</option>
+                              <option>Policarbonato Blue Cut</option>
+                              <option>Policarbonato Foto com Antirreflexo</option>
+                              <option>Policarbonato Transitions</option>
+                              <option>Policarbonato Transitions com Antirreflexo</option>
+                            </optgroup>
+                            <optgroup label="Policarbonato EXG">
+                              <option>Policarbonato EXG Branca</option>
+                              <option>Policarbonato EXG com Antirreflexo</option>
+                              <option>Policarbonato EXG Blue Cut</option>
+                              <option>Policarbonato EXG Foto com Antirreflexo</option>
+                              <option>Policarbonato EXG Transitions</option>
+                              <option>Policarbonato EXG Transitions com Antirreflexo</option>
+                            </optgroup>
+                            <optgroup label="Resina 1.61">
+                              <option>Resina 1.61 com Antirreflexo</option>
+                              <option>Resina 1.61 Blue Cut</option>
+                            </optgroup>
+                            <optgroup label="Resina 1.61 EXG">
+                              <option>Resina 1.61 EXG com Antirreflexo</option>
+                            </optgroup>
+
+                            <optgroup label="Resina 1.70">
+                              <option>Resina 1.70 EXG Blue Cut</option>
+                              <option>Resina 1.70 EXG Transitions</option>
+                              <option>Resina 1.70 EXG Transitions com Antirreflexo</option>
+                            </optgroup>
+                            </optgroup>
+                            <optgroup label="Multifocais">
+                            <optgroup label="Mult Resina">
+                              <option>Mult Resina Branca</option>
+                              <option>Mult Resina com Antirreflexo</option>
+                              <option>Mult Resina Blue Cut</option>
+                              <option>Mult Resina Foto com Antirreflexo</option>
+                              <option>Mult Resina Foto Blue Cut</option>
+                            </optgroup>
+                            <optgroup label="Mult Resina Surfaçada">
+                              <option>Mult Resina Branca Surfaçada</option>
+                              <option>Mult Resina com Antirreflexo Surfaçada</option>
+                              <option>Mult Resina Blue Cut Surfaçada</option>
+                              <option>Mult Resina Foto com Antirreflexo Surfaçada</option>
+                              <option>Mult Resina Foto Blue Cut Surfaçada</option>
+                              <option>Mult Resina Transitions Surfaçada</option>
+                              <option>Mult Resina Transitions com Antirreflexo Surfaçada</option>
+                            </optgroup>
+                            <optgroup label="Mult Resina 1.67">
+                              <option>Mult Resina com Antirreflexo 1.67</option>
+                              <option>Mult Resina Blue Cut 1.67</option>
+                              <option>Mult Resina Transitions com Antirreflexo 1.67</option>
+                            </optgroup>
+                            <optgroup label="Mult Resina 1.74">
+                              <option>Mult Resina com Antirreflexo 1.74</option>
+                              <option>Mult Resina Blue Cut 1.74</option>
+                              <option>Mult Resina Transitions com Antirreflexo 1.74</option>
+                            </optgroup>
+                            <optgroup label="Mult Resina HD">
+                              <option>Mult Resina Branca HD</option>
+                              <option>Mult Resina com Antirreflexo HD</option>
+                              <option>Mult Resina Blue Cut HD</option>
+                              <option>Mult Resina Transitions HD</option>
+                              <option>Mult Resina Transitions com Antirreflexo HD</option>
+                            </optgroup>
+                            <optgroup label="Mult Policarbonato">
+                              <option>Mult Policarbonato Branca</option>
+                              <option>Mult Policarbonato com Antirreflexo</option>
+                              <option>Mult Policarbonato Blue Cut</option>
+                              <option>Mult Policarbonato Transitions</option>
+                              <option>Mult Policarbonato Transitions com Antirreflexo</option>
+                            </optgroup>
+                            <optgroup label="Mult Policarbonato HD">
+                              <option>Mult Policarbonato Branca</option>
+                              <option>Mult Policarbonato com Antirreflexo HD</option>
+                              <option>Mult Policarbonato Blue Cut HD</option>
+                              <option>Mult Policarbonato Transitions HD</option>
+                              <option>Mult Policarbonato Transitions com Antirreflexo HD</option>
+                            </optgroup>
+                            </optgroup>
+                          </select>
+                        </div>
+                        <div class="col">
+                          <label for="valorLen" class="form-label">Valor</label>
+                          <input value="<%= servico.valorLen%>" type="text" class="form-control" name="valorLen">
+                        </div>
+                      </div>
+                      <p class="text-left lead lbB">Lente de contato</p>
+                      <div class="row g-3 mb-5">
+                        <div class="col">
+                          <label for="lenteContato" class="form-label">Lente de contato</label>
+                          <select name="lenteContato" value="<%=servico.lenteContato %>" class="form-select">
+                            <option selected>
+                              <%=servico.lenteContato %>
+                            </option>
+                            <option>Descartável incolor</option>
+                            <option>Descartável colorida</option>
+                            <option>Uso prolongado incolor</option>
+                            <option>Uso prolongado colorida</option>
+                          </select>
+                        </div>
+                        <div class="col">
+                          <label for="valorLenContato" class="form-label">Valor</label>
+                          <input value="<%= servico.valorLenContato%>" type="text" class="form-control"
+                            name="valorLenContato">
+                        </div>
+                      </div>
+
+                      <p class="text-left lead lbB" id="totalBruto"></p>
+
+                      <div class="row g-3 mb-3">
+                        <div class="col">
+                          <label for="total" class="form-label">Desconto</label>
+                          <input type="text" class="form-control" name="desconto">
+                        </div>
+                        <div class="col">
+                          <label for="total" class="form-label">Total</label>
+                          <input value="<%= servico.total%>" type="text" class="form-control" name="total">
+                        </div>
+                      </div>
+
+                      <h2 class="text-center my-5">Pagamento</h2>
+
+                      <div class="mb-3">
+                        <div class="mb-3">
+                          <label for="inputState" class="form-label">Forma de Pagamento</label>
+                          <select id="inputState" value="<%= servico.formaPagamento%>" name="formaPagamento"
+                            class="form-select">
+                            <option selected>
+                              <%= servico.formaPagamento%>
+                            </option>
+                            <option>Dinheiro</option>
+                            <option>Transferência</option>
+                            <option>Pix</option>
+                            <option>Cartão</option>
+                            <option>Dinheiro e Cartão</option>
+                          </select>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                          <div class="col">
+                            <label for="valorDin" class="form-label">Valor em dinheiro</label>
+                            <input value="<%= servico.valorDin%>" type="text" class="form-control" name="valorDin">
+                          </div>
+                          <div class="col">
+                            <label for="valorCar" class="form-label">Valor no cartão</label>
+                            <input value="<%= servico.valorCar%>" type="text" class="form-control" name="valorCar">
+                          </div>
+                        </div>
+
+                        <div class="mb-4">
+                          <label for="resta" class="form-label">Resta</label>
+                          <input value="<%= servico.resta%>" type="text" class="form-control" name="resta">
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                          <div class="col">
+                            <label for="pago" class="form-label">Pago</label>
+                            <select name="pago" value="<%=servico.pago %>" class="form-select">
+                              <option selected>
+                                <%=servico.pago %>
+                              </option>
+                              <option>Não pago</option>
+                              <option>Pago</option>
+                            </select>
+                          </div>
+                          <div class="col">
+                            <label for="entregue" class="form-label">Entregue</label>
+                            <select name="entregue" value="<%= servico.entregue %>" class="form-select">
+                              <option selected>
+                                <%= servico.entregue %>
+                              </option>
+                              <option>Não Entregue</option>
+                              <option>Entregue</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form-check form-switch my-3">
+                          <input class="form-check-input" name="pdf" value="true" type="checkbox"
+                            id="flexSwitchCheckDefault">
+                          <label class="form-check-label" for="flexSwitchCheckDefault">Gerar PDF</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mt-4">Finalizar</button>
+                </form>
+
+      </div>
+
+      <div class="col-lg-2"></div>
+    </div>
+  </div>
+
+
+
+  <%- include('includes/footer') %>
