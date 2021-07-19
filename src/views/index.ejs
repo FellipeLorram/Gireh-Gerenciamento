@@ -95,14 +95,14 @@
               </thead>
               <tbody>
                 <% servicos.forEach(servico=> { %>
-                  <tr>
+                  <tr class="tr__servico">
                     <td data-label="Data">
                       <%=servico.CriadoEm.getDate()%>/<%=servico.CriadoEm.getMonth() + 1%>/
                           <%=servico.CriadoEm.getFullYear() %>
                     </td>
 
                     <td data-label="Nome">
-                      <a class="NomeIndex" href="/servicos/index/<%=servico._id%>">
+                      <a class="NomeIndex link__servico" href="/servicos/pre-edit/<%=servico._id%>">
                         <%= servico.nome %>
                       </a>
                     </td>
@@ -123,13 +123,11 @@
                               <%} %>
 
                                 <%if(servico.entregue=='Entregue' ){%>
-                                  <td data-label="Situação" style="color: rgb(0, 121, 0);">Entregue</td>
+                                  <td data-label="Entrega" style="color: rgb(0, 121, 0);">Entregue</td>
                                   <%} else {%>
-                                    <td data-label="Situação" class="text-danger">A Entregar</td>
+                                    <td data-label="Entrega" class="text-danger">A Entregar</td>
                                     <%} %>
 
-                                      <td><a class="btn btn-danger" href="/servicos/delete/<%=servico._id%>">Deletar</a>
-                                      </td>
                   </tr>
                   <% });%>
               </tbody>

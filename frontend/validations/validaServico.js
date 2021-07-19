@@ -35,70 +35,114 @@ export default class Servico {
         if (esfOdInput.value) if (esfOdInput.value[0] !== '+' && esfOdInput.value[0] !== '-') {
             this.criaErro(esfOdInput, 'positivo ou negativo?');
             valido = true;
+            esfOdInput.focus()
         }
 
         if (esfOeInput.value) if (esfOeInput.value[0] !== '+' && esfOeInput.value[0] !== '-') {
             this.criaErro(esfOeInput, 'positivo ou negativo?');
             valido = true;
+            esfOeInput.focus();
+        }
+
+        if(!cilOdInput.value && eixoOdInput.value){
+            this.criaErro(cilOdInput, 'Qual grau?');
+            valido = true;
+            cilOdInput.focus()
+        }
+
+        if(!cilOeInput.value && eixoOeInput.value){
+            this.criaErro(cilOeInput, 'Qual grau?');
+            valido = true;
+            cilOeInput.focus()
         }
 
         if (cilOdInput.value && !eixoOdInput.value) {
             this.criaErro(eixoOdInput, 'Qual o eixo?');
             valido = true;
+            eixoOdInput.focus()
         }
 
         if (cilOeInput.value && !eixoOeInput.value) {
             this.criaErro(eixoOeInput, 'Qual o eixo?');
             valido = true;
+            eixoOeInput.focus()
         }
 
         if (eixoOdInput.value && Number(eixoOdInput.value) > 180) {
             this.criaErro(eixoOdInput, 'Eixo invalido');
             valido = true;
+            eixoOdInput.focus();
         }
 
         if (eixoOeInput.value && Number(eixoOeInput.value) > 180) {
             this.criaErro(eixoOeInput, 'Eixo invalido');
             valido = true;
+            eixoOeInput.focus();
         }
 
-        let grauEsfDireito = esfOdInput.value.split(esfOdInput.value[0])
-        grauEsfDireito = grauEsfDireito[1]
+        if (esfOdInput.value) {
+            if (esfOdInput.value[esfOdInput.value.length - 1] !== '5' && esfOdInput.value[esfOdInput.value.length - 1] !== '0') {
+                this.criaErro(esfOdInput, 'Grau invalido');
+                valido = true;
+                esfOdInput.focus()
+            }
 
-        let grauEsfEsquerdo = esfOeInput.value.split(esfOeInput.value[0])
-        grauEsfEsquerdo = grauEsfEsquerdo[1]
-
-        let graucilDireito = cilOdInput.value.split(cilOdInput.value[0])
-        graucilDireito = graucilDireito[1]
-
-        let graucilEsquerdo = cilOeInput.value.split(cilOeInput.value[0])
-        graucilEsquerdo = graucilEsquerdo[1]
-
-
-        if (esfOdInput.value && Number(grauEsfDireito) % 5 != 0) {
-            this.criaErro(esfOdInput, 'Grau invalido');
-            valido = true;
+            if (esfOdInput.value.length > 6) {
+                this.criaErro(esfOdInput, 'Grau invalido');
+                valido = true;
+                esfOdInput.focus()
+            }
         }
 
-        if (esfOeInput.value && Number(grauEsfEsquerdo) % 5 != 0) {
-            this.criaErro(esfOeInput, 'Grau invalido');
-            valido = true;
+        if (esfOeInput.value) {
+            if (esfOeInput.value[esfOeInput.value.length - 1] !== '5' && esfOeInput.value[esfOeInput.value.length - 1] !== '0') {
+                this.criaErro(esfOeInput, 'Grau invalido');
+                valido = true;
+                esfOeInput.focus()
+            }
+            if (esfOeInput.value.length > 6) {
+                this.criaErro(esfOeInput, 'Grau invalido');
+                valido = true;
+                esfOeInput.focus()
+            }
         }
-        if (cilOdInput.value && Number(graucilDireito) % 5 != 0) {
-            this.criaErro(cilOdInput, 'Grau invalido');
-            valido = true;
+        if (cilOdInput.value) {
+            if (cilOdInput.value[cilOdInput.value.length - 1] !== '5' && cilOdInput.value[cilOdInput.value.length - 1] !== '0') {
+                this.criaErro(cilOdInput, 'Grau invalido');
+                valido = true;
+                cilOdInput.focus()
+            }
+            if (cilOdInput.value.length > 6) {
+                this.criaErro(cilOdInput, 'Grau invalido');
+                valido = true;
+                cilOdInput.focus()
+            }
         }
 
-        if (cilOeInput.value && Number(graucilEsquerdo) % 5 != 0) {
-            this.criaErro(cilOeInput, 'Grau invalido');
-            valido = true;
+        if (cilOeInput.value) {
+            if (cilOeInput.value[cilOeInput.value.length - 1] !== '5' && cilOeInput.value[cilOeInput.value.length - 1] !== '0') {
+                this.criaErro(cilOeInput, 'Grau invalido');
+                valido = true;
+                cilOeInput.focus()
+
+            }
+            if (cilOeInput.value.length > 6) {
+                this.criaErro(cilOeInput, 'Grau invalido');
+                valido = true;
+                cilOeInput.focus();
+            }
+
         }
-
-
         if (!valido) el.submit();
     }
 
     criaErro(campo, msg) {
+        const errorTxt = document.querySelectorAll('.error-text');
+
+        if (errorTxt) errorTxt.forEach(e => {
+            e.remove()
+        })
+
         const div = document.createElement('div');
         div.innerHTML = msg;
         div.classList.add('error-text');

@@ -77,8 +77,8 @@ if (totalInput) {
 
     totalInput.addEventListener('click', () => {
         if (valorArmInput.value || valorLenInput.value || valorLenContatoInput.value) {
-            const desconto = ( Number(valorArmInput.value) + Number(valorLenInput.value) + Number(valorLenContatoInput.value) )/100 * Number(descontoInput.value) 
-            totalInput.value = ( Number(valorArmInput.value) + Number(valorLenInput.value) + Number(valorLenContatoInput.value) ) - desconto
+            const desconto = (Number(valorArmInput.value) + Number(valorLenInput.value) + Number(valorLenContatoInput.value)) / 100 * Number(descontoInput.value)
+            totalInput.value = (Number(valorArmInput.value) + Number(valorLenInput.value) + Number(valorLenContatoInput.value)) - desconto
         }
     });
 
@@ -90,11 +90,13 @@ if (totalInput) {
             }
         }
     })
+
+    document.addEventListener('change', () => {
+        document.querySelector("#totalBruto").innerHTML = `Total Bruto: R$ ${Number(valorArmInput.value) + Number(valorLenInput.value) + Number(valorLenContatoInput.value)}`
+    })
+
 }
 
-document.addEventListener('change', () => {
-    document.querySelector("#totalBruto").innerHTML = `Total Bruto: R$ ${Number(valorArmInput.value) + Number(valorLenInput.value) + Number(valorLenContatoInput.value)}`
-})
 
 
 const tipo = document.getElementById('tipoConcerto');
@@ -115,8 +117,65 @@ if (tipo) {
 
 import Servico from './validations/validaServico';
 import Ficha from './validations/validaFicha'
+import cancelwindow from './validations/cancelwindow'
 
 const ficha = new Ficha('.form-ficha');
 const servico = new Servico('.form-servico');
 servico.init()
 ficha.init()
+
+const dell_btn_vendas = document.querySelector(".dell_btn_vendas");
+const dell_btn_fichas = document.querySelector(".dell_btn_fichas");
+const dell_btn_concertos = document.querySelector(".dell_btn_concertos");
+
+if (dell_btn_vendas) {
+    dell_btn_vendas.addEventListener("click", e => {
+        e.preventDefault()
+
+        const hreftext = `${e.target.href}`
+
+        cancelwindow.open({
+            title: 'DELETAR SERVIÇO',
+            message: 'Após a exclusão, voce perderá todos os dados dessa venda. Você realmente deseja excluí-la?',
+            href: hreftext
+        })
+    });
+}
+
+if (dell_btn_fichas) {
+    dell_btn_fichas.addEventListener("click", e => {
+        e.preventDefault()
+
+        const hreftext = `${e.target.href}`
+        cancelwindow.open({
+            title: 'DELETAR FICHA',
+            message: 'Após a exclusão, voce perderá todos os dados dessa ficha. Você realmente deseja excluí-la?',
+            href: hreftext
+        })
+
+    });
+}
+
+if (dell_btn_concertos) {
+    dell_btn_concertos.addEventListener("click", e => {
+        e.preventDefault()
+
+        const hreftext = `${e.target.href}`
+        cancelwindow.open({
+            title: 'DELETAR CONCERTO',
+            message: 'Após a exclusão, voce perderá todos os dados desse concerto. Você realmente deseja excluí-la?',
+            href: hreftext
+        })
+
+    });
+}
+
+const tr__servico = document.querySelectorAll('.tr__servico')
+if (tr__servico) {
+    tr__servico.forEach(servico => {
+        servico.addEventListener('click', e => {
+            if (!e.target.classList.contains('dell_btn_vendas')) servico.querySelector('.link__servico').click()
+        })
+    })
+}
+

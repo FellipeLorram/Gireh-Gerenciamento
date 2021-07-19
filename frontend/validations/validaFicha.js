@@ -35,31 +35,37 @@ export default class Ficha{
         if(esfOdInput.value) if( esfOdInput.value[0] !== '+' && esfOdInput.value[0] !== '-' ){
             this.criaErro(esfOdInput, 'positivo ou negativo?');
             valido = true;
+            esfOdInput.focus()
         }
 
         if(esfOeInput.value) if( esfOeInput.value[0] !== '+' && esfOeInput.value[0] !== '-' ){
             this.criaErro(esfOeInput, 'positivo ou negativo?');
             valido = true;
+            esfOeInput.focus()
         }
 
         if(cilOdInput.value && !eixoOdInput.value){
             this.criaErro(eixoOdInput, 'Qual o eixo?');
             valido = true;
+            eixoOdInput.focus()
         } 
 
         if(cilOeInput.value && !eixoOeInput.value){
             this.criaErro(eixoOeInput, 'Qual o eixo?');
             valido = true;
+            eixoOeInput.focus()
         } 
 
         if(eixoOdInput.value && Number(eixoOdInput.value) > 180 ){
             this.criaErro(eixoOdInput, 'Eixo invalido');
             valido = true;
+            eixoOdInput.focus()
         }
 
         if(eixoOeInput.value && Number(eixoOeInput.value) > 180 ){
             this.criaErro(eixoOeInput, 'Eixo invalido');
             valido = true;
+            eixoOeInput.focus()
         }
 
         if(!valido) el.submit();
@@ -67,6 +73,12 @@ export default class Ficha{
     }
 
     criaErro(campo, msg) {
+        const errorTxt = document.querySelectorAll('.error-text');
+
+        if (errorTxt) errorTxt.forEach(e => {
+            e.remove()
+        })
+
         const div = document.createElement('div');
         div.innerHTML = msg;
         div.classList.add('error-text');

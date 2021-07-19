@@ -30,7 +30,7 @@ exports.register = async (req, res) => {
       }
 
       req.flash('success', 'Concerto inserido no sistema');
-      req.session.save(() => res.redirect(`/concerto/novo-concerto/${concerto.concerto._id}`));
+      req.session.save(() => res.redirect(`/concertos/concertos`));
       return;
 
   } catch (e) {
@@ -64,7 +64,7 @@ exports.edit = async function (req, res) {
       }
 
       req.flash('success', 'Concerto editado com sucesso.');
-      req.session.save(() => res.redirect(`/concerto/novo-concerto/${concerto.concerto._id}`));
+      req.session.save(() => res.redirect(`/concertos/concertos`));
       return;
 
   } catch (e) {

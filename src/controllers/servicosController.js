@@ -44,8 +44,9 @@ exports.register = async (req, res) => {
         }
         else {
             req.flash('success', 'Seviço Concluido.');
-            req.session.save(() => res.redirect(`/servicos/index/${servico.servico._id}`));
+            req.session.save(() => res.redirect(`/`));
         }
+
         return;
 
     } catch (e) {
@@ -63,6 +64,16 @@ exports.editIndex = async function (req, res) {
     if (!servico) return res.send('404');
 
     res.render('servicos', { servico });
+};
+
+exports.preEdit = async function (req, res) {
+    if (!req.params.id) return res.send('404');
+
+    const servico = await Servico.searchId(req.params.id);
+
+    if (!servico) return res.send('404');
+
+    res.render('servicoPreEdit', { servico });
 };
 
 exports.edit = async function (req, res) {
@@ -95,7 +106,7 @@ exports.edit = async function (req, res) {
         }
         else {
             req.flash('success', 'Seviço Editado.');
-            req.session.save(() => res.redirect(`/servicos/index/${servico.servico._id}`));
+            req.session.save(() => res.redirect(`/`));
         }
         return;
 

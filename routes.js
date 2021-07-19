@@ -22,6 +22,7 @@ route.get('/servicos/pesquisa', loginRequired, servicosController.ServicoPesquis
 
 route.get('/servicos/index', loginRequired, servicosController.index);
 route.post('/servicos/register', loginRequired, servicosController.register);
+route.get('/servicos/pre-edit/:id', loginRequired, servicosController.preEdit);
 route.get('/servicos/index/:id', loginRequired, servicosController.editIndex);
 route.post('/servicos/edit/:id', loginRequired, servicosController.edit);
 route.get('/servicos/delete/:id', loginRequired, servicosController.delete);

@@ -30,7 +30,7 @@ exports.register = async (req, res) => {
         }
 
         req.flash('success', 'Ficha Enviada');
-        req.session.save(() => res.redirect(`/fichas/index/${ficha.ficha._id}`));
+        req.session.save(() => res.redirect(`/fichas/fichas`));
         return;
 
     } catch (e) {
@@ -64,7 +64,7 @@ exports.edit = async function (req, res) {
         }
 
         req.flash('success', 'ficha editada com sucesso.');
-        req.session.save(() => res.redirect(`/fichas/index/${ficha.ficha._id}`));
+        req.session.save(() => res.redirect(`/fichas/fichas`));
         return;
 
     } catch (e) {
