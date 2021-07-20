@@ -92,12 +92,12 @@
               </thead>
               <tbody>
                 <% fichas.forEach(ficha=> { %>
-                  <tr>
+                  <tr class="tr__servico">
                     <td data-label="Data">
                       <%=ficha.CriadoEm.getDate()%>/<%=ficha.CriadoEm.getMonth()%>/<%=ficha.CriadoEm.getFullYear() %>
                     </td>
                     <td data-label="Nome">
-                      <a class="NomeIndex" href="/fichas/index/<%=ficha._id%>">
+                      <a class="NomeIndex link__servico" href="/fichas/index/<%=ficha._id%>">
                         <%= ficha.nome %>
                       </a>
                     </td>

@@ -7,7 +7,7 @@ const servicosController = require('./src/controllers/servicosController');
 const fichaController = require('./src/controllers/fichaController');
 const concertoController = require('./src/controllers/concertoController');
 const ferramentasController = require('./src/controllers/ferramentasController');
-const { loginRequired } = require('./src/middlewares/middleware');
+const { loginRequired, adminRequired } = require('./src/middlewares/middleware');
 
 route.get('/',loginRequired, homeController.index);
 
@@ -46,7 +46,7 @@ route.get('/fichas/fichas', loginRequired, fichaController.indexFichas);
 
 route.get('/fichas/fichas/pesquisa', loginRequired, fichaController.pesquisaFichas);
 
-route.get('/relatorios/index', loginRequired, ferramentasController.relatorioIndex);
+route.get('/relatorios/index', loginRequired, adminRequired, ferramentasController.relatorioIndex);
 route.get('/ferramentas/index', loginRequired, ferramentasController.ferramentaIndex);
 route.get('/ferramentas/lista-lentes', loginRequired, ferramentasController.listaLentesIndex);
 route.post('/ferramentas/lista-lentes/gera-lista', loginRequired, ferramentasController.geraLista)

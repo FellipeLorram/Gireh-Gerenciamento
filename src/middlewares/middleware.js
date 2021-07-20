@@ -15,5 +15,13 @@ exports.loginRequired = (req, res, next) =>{
     next();
 }
 
+exports.adminRequired = (req, res, next) =>{
+    if(req.session.user.email !== 'fellipelorram@gmail.com'){
+        req.flash('errors', 'Você não possui essa permissão.');
+        req.session.save(() => {res.redirect('/')});
+        return;
+    }
 
+    next();
+}
 

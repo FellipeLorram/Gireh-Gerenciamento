@@ -92,19 +92,18 @@
                   <th>Total</th>
                   <th>Situação</th>
                   <th>Entrega</th>
-                  <th>Deletar</th>
                 </tr>
               </thead>
               <tbody>
                 <% servicos.forEach(servico=> { %>
-                  <tr>
+                  <tr class="tr__servico">
                     <td data-label="Data">
                       <%=servico.CriadoEm.getDate()%>/<%=servico.CriadoEm.getMonth() + 1%>/
                           <%=servico.CriadoEm.getFullYear() %>
                     </td>
 
                     <td data-label="Nome">
-                      <a class="NomeIndex" href="/servicos/index/<%=servico._id%>">
+                      <a class="NomeIndex link__servico" href="/servicos/pre-edit/<%=servico._id%>">
                         <%= servico.nome %>
                       </a>
                     </td>
@@ -130,7 +129,6 @@
                                     <td data-label="Situação" class="text-danger">A Entregar</td>
                                     <%} %>
 
-                                      <td><a class="btn btn-danger dell_btn_vendas" href="/servicos/delete/<%=servico._id%>">Deletar</a>
                                       </td>
                   </tr>
                   <% });%>

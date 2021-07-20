@@ -106,7 +106,7 @@ exports.edit = async function (req, res) {
         }
         else {
             req.flash('success', 'Seviço Editado.');
-            req.session.save(() => res.redirect(`/`));
+            req.session.save(() => res.redirect(`/servicos/pre-edit/${servico.servico._id}`));
         }
         return;
 
