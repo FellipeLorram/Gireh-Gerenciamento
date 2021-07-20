@@ -87,23 +87,33 @@
                 <tr>
                   <th>Data</th>
                   <th>Nome</th>
+                  <th>Telefone</th>
                   <th>Tipo</th>
                   <th>Situação</th>
+                  <th>Entrega</th>
                   <th>Deletar</th>
                 </tr>
               </thead>
               <tbody>
                 <% concertos.forEach(concerto=> { %>
-                  <tr>
+                  <tr class="tr__servico">
                     <td data-label="Data">
                       <%=concerto.CriadoEm.getDate()%>/<%=concerto.CriadoEm.getMonth() + 1 %>/
                           <%=concerto.CriadoEm.getFullYear() %>
                     </td>
                     <td data-label="Nome">
-                      <a class="NomeIndex" href="/concerto/novo-concerto/<%=concerto._id%>">
+                      <a class="NomeIndex link__servico" href="/concerto/novo-concerto/<%=concerto._id%>">
                         <%= concerto.nome %>
                       </a>
                     </td>
+
+                    <%if(concerto.telefone == '' ){%>
+                      <td data-label="Telefone">Não Preenchido</td>
+                      <%} else {%>
+                        <td data-label="Telefone">
+                          <%= concerto.telefone %>
+                        </td>
+                        <%} %>
 
                     <%if(concerto.tipo=='' ){%>
                       <td data-label="Tipo">Não Preenchido</td>
@@ -118,6 +128,12 @@
                             <td data-label="Situação" style="color: rgb(0, 121, 0);">Pago</td>
                             <%} else {%>
                               <td data-label="Situação" class="text-danger">Não Pago</td>
+                              <%} %>
+
+                          <%if(concerto.pago =='Entregue' ){%>
+                            <td data-label="Entrega" style="color: rgb(0, 121, 0);">Entregue</td>
+                            <%} else {%>
+                              <td data-label="Entrega" class="text-danger">A Entregar</td>
                               <%} %>
 
                                 <td><a class="btn btn-danger dell_btn_concertos" href="/concertos/delete/<%=concerto._id%>">Deletar</a>
