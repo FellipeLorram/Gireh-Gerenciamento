@@ -174,7 +174,9 @@ const tr__servico = document.querySelectorAll('.tr__servico')
 if (tr__servico) {
     tr__servico.forEach(servico => {
         servico.addEventListener('click', e => {
-            if (!e.target.classList.contains('dell_btn_vendas')) servico.querySelector('.link__servico').click()
+            servico.querySelector('.link__servico').click()
+            servico.classList.remove('tr__servico')
+            servico.classList.add('clickSimulation')
         })
     })
 }

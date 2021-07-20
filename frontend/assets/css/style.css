@@ -435,6 +435,10 @@ label {
   border-bottom: 1px solid rgb(104, 104, 104);
 }
 
+.table3 th{
+  padding: 5px 0;
+}
+
 .table2 tr td, .table3 tr td {
   color: #000000;
   left: 0;
@@ -508,7 +512,7 @@ label {
     text-align: left;
     color: black;
   }
-  .tr__servico {
+  .tr__servico td {
     -webkit-box-shadow: 0 10px 6px -6px #777;
     -moz-box-shadow: 0 10px 6px -6px #777;
     box-shadow: 0 10px 6px -6px #777;
@@ -731,6 +735,22 @@ label {
 
 .tr__servico:focus {
   box-shadow: none;
-
 }
 
+.clickSimulation {
+  transform: scale(.98);
+  animation-name: clickSimulation;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes clickSimulation {
+  from {
+    transform: scale(.98);
+  }
+  to {
+    box-shadow: 0 10px 6px -6px #777;
+    transform: scale(1);
+  }
+}
