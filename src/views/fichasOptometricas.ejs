@@ -80,27 +80,71 @@
 
           <h1 class="text-center my-5">Fichas Optométricas</h1>
           <% if(fichas.fichasHoje.length> 0 || fichas.fichasRest.length > 0){%>
-            <% if(fichas.fichasHoje.length> 0) {%>
+            <% if(fichas.fichasHoje.length> 0){%>
 
               <div class="row g-3">
-                <div class="col text-left">Geral: (<%= fichas.qtd.rest %>)
+
+                <div class="col">Hoje: <%= fichas.qtd.hoje %>
                     <div class="line"></div>
                 </div>
-                <div class="col">
-                  <div class="row g-3">
-
-                    <div class="col">Hoje: (<%= fichas.qtd.hoje %>)</div>
-                    <div class="col">N.A: (<%= fichas.qtd.nA %>)</div>
-                  </div>
-                  <div class="line"></div>
-
+                <div class="col">Nâo Atendidos:
+                  <%= fichas.qtd.nA %>
+                    <div class="line"></div>
                 </div>
+
+
               </div>
 
-              <% } %>
-                <% if(fichas.fichasHoje.length> 0){%>
 
-                  <h5 class="text-center mt-2 mb-5">Hoje</h5>
+              <table class="table">
+                <thead class="thead">
+                  <tr>
+                    <th>Data</th>
+                    <th>Nome</th>
+                    <th>Situação</th>
+                    <th>Posição</th>
+                    <th>Deletar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% fichas.fichasHoje.forEach(ficha=> { %>
+                    <tr class="tr__servico">
+                      <td data-label="Data">
+                        <%=ficha.CriadoEm.getDate()%>/<%=ficha.CriadoEm.getMonth()%>/<%=ficha.CriadoEm.getFullYear() %>
+                      </td>
+                      <td data-label="Nome">
+                        <a class="NomeIndex link__servico" href="/fichas/index/<%=ficha._id%>">
+                          <%= ficha.nome %>
+                        </a>
+                      </td>
+
+                      <%if(ficha.atendido=='Atendido' ){%>
+                        <td data-label="Situação" style="color: rgb(0, 121, 0);">Atendido</td>
+                        <%} else {%>
+                          <td data-label="Situação" class="text-danger">Não Atendido</td>
+                          <%} %>
+
+                            <td data-label="Posição">
+                              <span class="NomeIndex">
+                                <%= ficha.posicao %>
+                              </span>
+                            </td>
+
+
+                            <td><a class="btn btn-danger dell_btn_fichas"
+                                href="/fichas/delete/<%=ficha._id%>">Deletar</a></td>
+                    </tr>
+                    <% });%>
+                </tbody>
+              </table>
+              <div class="line my-5"></div>
+
+
+              <% }%>
+
+                <% if(fichas.fichasRest.length> 0){%>
+
+                  <h5 class="text-center mt-2 mb-5">Geral</h5>
 
                   <table class="table">
                     <thead class="thead">
@@ -112,11 +156,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <% fichas.fichasHoje.forEach(ficha=> { %>
+                      <% fichas.fichasRest.forEach(ficha=> { %>
                         <tr class="tr__servico">
                           <td data-label="Data">
-                            <%=ficha.CriadoEm.getDate()%>/<%=ficha.CriadoEm.getMonth()%>/<%=ficha.CriadoEm.getFullYear()
-                                  %>
+                            <%=ficha.CriadoEm.getDate()%>/<%=ficha.CriadoEm.getMonth()%>/
+                                <%=ficha.CriadoEm.getFullYear() %>
                           </td>
                           <td data-label="Nome">
                             <a class="NomeIndex link__servico" href="/fichas/index/<%=ficha._id%>">
@@ -135,54 +179,12 @@
                         <% });%>
                     </tbody>
                   </table>
-                  <div class="line"></div>
 
 
                   <% }%>
-
-                    <% if(fichas.fichasRest.length> 0){%>
-
-                      <h5 class="text-center mt-2 mb-5">Geral</h5>
-
-                      <table class="table">
-                        <thead class="thead">
-                          <tr>
-                            <th>Data</th>
-                            <th>Nome</th>
-                            <th>Situação</th>
-                            <th>Deletar</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <% fichas.fichasRest.forEach(ficha=> { %>
-                            <tr class="tr__servico">
-                              <td data-label="Data">
-                                <%=ficha.CriadoEm.getDate()%>/<%=ficha.CriadoEm.getMonth()%>/
-                                    <%=ficha.CriadoEm.getFullYear() %>
-                              </td>
-                              <td data-label="Nome">
-                                <a class="NomeIndex link__servico" href="/fichas/index/<%=ficha._id%>">
-                                  <%= ficha.nome %>
-                                </a>
-                              </td>
-
-                              <%if(ficha.atendido=='Atendido' ){%>
-                                <td data-label="Situação" style="color: rgb(0, 121, 0);">Atendido</td>
-                                <%} else {%>
-                                  <td data-label="Situação" class="text-danger">Não Atendido</td>
-                                  <%} %>
-                                    <td><a class="btn btn-danger dell_btn_fichas"
-                                        href="/fichas/delete/<%=ficha._id%>">Deletar</a></td>
-                            </tr>
-                            <% });%>
-                        </tbody>
-                      </table>
-
-
+                    <% } else {%>
+                      <p class="text-center lead"> Nenhuma ficha inserida na base de dados</p>
                       <% }%>
-                        <% } else {%>
-                          <p class="text-center lead"> Nenhuma ficha inserida na base de dados</p>
-                          <% }%>
       </div>
 
       <div class="col-lg-2"></div>

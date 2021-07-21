@@ -4,6 +4,7 @@ exports.indexFichas = async (req, res) => {
     const fichasToFilter = await Ficha.searchFichas();
     const hoje = new Date()
     const qtd = { hoje: 0, rest: 0, nA: 0 }
+    let posicao = 0;
 
     const fichasHoje = fichasToFilter.filter(ficha => {
         if (ficha.CriadoEm.getDate() == hoje.getDate()
@@ -11,9 +12,15 @@ exports.indexFichas = async (req, res) => {
             && ficha.CriadoEm.getFullYear() == hoje.getFullYear()) {
             qtd.hoje++
             if (ficha.atendido !== 'Atendido') qtd.nA++
+            posicao++
             return ficha
         }
     });
+
+    for (const ficha of fichasHoje) {
+        ficha.posicao = posicao;
+        posicao--;
+    }
 
     const fichasRest = fichasToFilter.filter(ficha => {
         qtd.rest++
