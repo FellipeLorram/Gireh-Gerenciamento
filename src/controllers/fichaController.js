@@ -1,7 +1,32 @@
 const Ficha = require('../models/FichaModel');
 
 exports.indexFichas = async (req, res) => {
-    const fichas = await Ficha.searchFichas();
+    const fichasToFilter = await Ficha.searchFichas();
+    const hoje = new Date()
+    const qtd = { hoje: 0, rest: 0, nA: 0 }
+
+    const fichasHoje = fichasToFilter.filter(ficha => {
+        if (ficha.CriadoEm.getDate() == hoje.getDate()
+            && ficha.CriadoEm.getMonth() == hoje.getMonth()
+            && ficha.CriadoEm.getFullYear() == hoje.getFullYear()) {
+            qtd.hoje++
+            if (ficha.atendido !== 'Atendido') qtd.nA++
+            return ficha
+        }
+    });
+
+    const fichasRest = fichasToFilter.filter(ficha => {
+        qtd.rest++
+        return ficha.CriadoEm.getDate() !== hoje.getDate()
+    })
+
+
+    const fichas = {
+        qtd,
+        fichasHoje,
+        fichasRest
+    }
+
     res.render('fichasOptometricas', { fichas });
     return
 };

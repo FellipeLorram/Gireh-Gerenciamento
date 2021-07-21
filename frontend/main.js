@@ -174,9 +174,11 @@ const tr__servico = document.querySelectorAll('.tr__servico')
 if (tr__servico) {
     tr__servico.forEach(servico => {
         servico.addEventListener('click', e => {
-            servico.querySelector('.link__servico').click()
-            servico.classList.remove('tr__servico')
-            servico.classList.add('clickSimulation')
+            if (!e.target.classList.contains('dell_btn_fichas')) {
+                servico.querySelector('.link__servico').click()
+                servico.classList.remove('tr__servico')
+                servico.classList.add('clickSimulation')
+            }
         })
     })
 }
