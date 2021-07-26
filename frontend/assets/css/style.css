@@ -336,7 +336,7 @@ nav .navbar .links li:hover .htmlCss-sub-menu, nav .navbar .links li:hover .js-s
   }
 }
 
-.NomeIndex {
+.NomeIndex , .posicao{
   text-decoration: none;
   color: rgb(14, 14, 14);
   font-weight: 600;
@@ -776,4 +776,146 @@ label {
   background: #b4b4b4;
   margin: 0;
   margin-bottom: 20px;
+}
+
+.relatorio_container{
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabs_container{
+  background: #b4b4b4;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.relatorio_geral{
+  margin-bottom: 10px;
+  background: #b4b4b4;
+  height: 80px;
+  border-radius: 6px;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.relatorio_geral{
+  margin-bottom: 10px;
+  background: #b4b4b4;
+  height: 80px;
+  border-radius: 6px;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.relatorio_geral_inside{
+  margin-bottom: 10px;
+  background: #b4b4b4;
+  height: 40px;
+  border-radius: 6px;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.texto_geral, .numero_geral, .numero_inside {
+  color: #000000;
+  font-weight: bold;
+  font-size: 0.9em;
+  padding: 0 15px;
+}
+.numero_geral{
+  color: rgb(0, 121, 0);
+}
+
+
+.tabs{
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  padding: 10px;
+}
+
+.tabs_inside{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+}
+
+.tabs__label_inside_mais_vendida{
+  align-items: center;
+  justify-content: left;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+}
+
+.tabs__label{
+  padding: 10px 16px;
+  color: #000000;
+}
+
+.tabs__label-inside{
+  padding: 7px 13px;
+}
+
+.tabs__radio{
+  display: none;
+}
+
+.tabs__content{
+  background: #c7c7c7;
+  color: #000000;
+  padding: 10px;
+  order: 1;
+  width: 100%;
+  border: 3px solid rgb(0, 121, 0);
+  border-bottom: 0;
+  border-radius: 3px;
+  line-height: 1.5em;
+  font-size: 0.9em;
+  display: none;
+}
+
+.tabs__content_inside, .tabs__content_inside_mais_vendida{
+  background: #c7c7c7;
+  color: #000000;
+  padding: 10px;
+  order: 1;
+  width: 100%;
+  border-top: 2px solid rgb(0, 121, 0);
+  border-radius: 0 0 3px 3px;
+  line-height: 1.5em;
+  font-size: 0.9em;
+  display: none;
+}
+
+.tabs__radio:checked+.tabs__label,
+.tabs__radio:checked+.tabs__label-inside,
+.tabs__radio:checked+.tabs__label_inside_mais_vendida{
+  font-weight: bold;
+  color: rgb(0, 121, 0);
+  border-bottom: 3px solid rgb(0, 121, 0);
+}
+
+.tabs__radio:checked+.tabs__label+.tabs__content,
+.tabs__radio:checked+.tabs__label-inside+.tabs__content_inside,
+.tabs__radio:checked+.tabs__label_inside_mais_vendida+.tabs__content_inside{
+  display: initial;
 }

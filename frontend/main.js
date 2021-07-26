@@ -1,6 +1,10 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import './assets/css/style.css';
+import Servico from './validations/validaServico';
+import Ficha from './validations/validaFicha'
+import cancelwindow from './validations/cancelwindow'
+
 
 // search-box open close js code
 let navbar = document.querySelector(".navbar");
@@ -115,10 +119,6 @@ if (tipo) {
 
 ///// Validação front-end ////
 
-import Servico from './validations/validaServico';
-import Ficha from './validations/validaFicha'
-import cancelwindow from './validations/cancelwindow'
-
 const ficha = new Ficha('.form-ficha');
 const servico = new Servico('.form-servico');
 servico.init()
@@ -182,4 +182,3 @@ if (tr__servico) {
         })
     })
 }
-

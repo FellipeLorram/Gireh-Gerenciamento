@@ -29,6 +29,7 @@ exports.geraLista = async (req, res) => {
 }
 
 exports.relatorioIndex = async (req, res) => {
+  
   res.render('relatorios')
 }
 

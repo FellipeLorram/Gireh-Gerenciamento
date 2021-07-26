@@ -80,7 +80,7 @@
 
           <h1 class="text-center my-5">Fichas Optométricas</h1>
           <% if(fichas.fichasHoje.length> 0 || fichas.fichasRest.length > 0){%>
-            <% if(fichas.fichasHoje.length> 0){%>
+            <% if(fichas.fichasHoje.length > 0 ){%>
 
               <div class="row g-3">
 
@@ -97,17 +97,21 @@
 
 
               <table class="table">
+                <%if(fichas.qtd.nA > 0 ){%>
                 <thead class="thead">
                   <tr>
                     <th>Data</th>
                     <th>Nome</th>
-                    <th>Situação</th>
+                    <th>Situção</th>
                     <th>Posição</th>
                     <th>Deletar</th>
                   </tr>
                 </thead>
+                <%} %>
                 <tbody>
                   <% fichas.fichasHoje.forEach(ficha=> { %>
+                    <%if(ficha.atendido !== 'Atendido' ){%>
+                    
                     <tr class="tr__servico">
                       <td data-label="Data">
                         <%=ficha.CriadoEm.getDate()%>/<%=ficha.CriadoEm.getMonth()%>/<%=ficha.CriadoEm.getFullYear() %>
@@ -118,22 +122,53 @@
                         </a>
                       </td>
 
-                      <%if(ficha.atendido=='Atendido' ){%>
-                        <td data-label="Situação" style="color: rgb(0, 121, 0);">Atendido</td>
-                        <%} else {%>
-                          <td data-label="Situação" class="text-danger">Não Atendido</td>
-                          <%} %>
+                        <td data-label="Situação" class="text-danger">Não Atendido</td>
 
-                            <td data-label="Posição">
-                              <span class="NomeIndex">
-                                <%= ficha.posicao %>
-                              </span>
-                            </td>
+                        <td  data-label="Posição">
+                          <span class="posicao">
+                            <%= ficha.posicao %>
+                          </span>
+                        </td>
+
+                            <td><a class="btn btn-danger dell_btn_fichas"
+                                href="/fichas/delete/<%=ficha._id%>">Deletar</a></td>
+                    </tr>
+                    <%} %>
+                    <% });%>
+                </tbody>
+              </table>
+              <table class="table">
+                <%if(fichas.qtd.nA == 0 ){%>
+                <thead class="thead">
+                  <tr>
+                    <th>Data</th>
+                    <th>Nome</th>
+                    <th>Situção</th>
+                    <th>Deletar</th>
+                  </tr>
+                </thead>
+                <%} %>
+                <tbody>
+                  <% fichas.fichasHoje.forEach(ficha=> { %>
+                    <%if(ficha.atendido == 'Atendido' ){%>
+                    
+                    <tr class="tr__servico">
+                      <td data-label="Data">
+                        <%=ficha.CriadoEm.getDate()%>/<%=ficha.CriadoEm.getMonth()%>/<%=ficha.CriadoEm.getFullYear() %>
+                      </td>
+                      <td data-label="Nome">
+                        <a class="NomeIndex link__servico" href="/fichas/index/<%=ficha._id%>">
+                          <%= ficha.nome %>
+                        </a>
+                      </td>
+
+                        <td data-label="Situação" style="color: rgb(0, 121, 0);">Atendido</td>
 
 
                             <td><a class="btn btn-danger dell_btn_fichas"
                                 href="/fichas/delete/<%=ficha._id%>">Deletar</a></td>
                     </tr>
+                    <%} %>
                     <% });%>
                 </tbody>
               </table>

@@ -11,15 +11,19 @@ exports.indexFichas = async (req, res) => {
             && ficha.CriadoEm.getMonth() == hoje.getMonth()
             && ficha.CriadoEm.getFullYear() == hoje.getFullYear()) {
             qtd.hoje++
-            if (ficha.atendido !== 'Atendido') qtd.nA++
-            posicao++
+            if (ficha.atendido !== 'Atendido') {
+                qtd.nA++
+                posicao++
+            }
             return ficha
         }
     });
 
     for (const ficha of fichasHoje) {
-        ficha.posicao = posicao;
-        posicao--;
+        if (ficha.atendido != 'Atendido') {
+            ficha.posicao = posicao;
+            posicao--;
+        }
     }
 
     const fichasRest = fichasToFilter.filter(ficha => {
