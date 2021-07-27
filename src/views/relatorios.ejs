@@ -76,161 +76,267 @@
             <div class="col-lg-8 my-3">
                 <h1 class="text-center my-3">Relatório</h1>
                 <div class="line"></div>
-                <div class="relatorio_container">
 
-                    <div class="relatorio_geral">
-                        <div class="texto_geral">Lucro Bruto Geral</div>
-                        <div class="numero_geral"> <em> R$790 </em></div>
+                <div class="accordion">
+                    <button type="button" class="accordion__button">
+                        Lucro Bruto Geral <span class="accordion_button_number"> <em> R$790 </em></span></button>
+                    <div class="accordion_content">
+                        <div class="relatorio_geral_inside">
+                            <div class="texto_geral">Lucro bruto vendas</div>
+                            <div class="numero_inside"> <em> 36 </em></div>
+                        </div>
+
+                        <div class="relatorio_geral_inside">
+                            <div class="texto_geral">Lucro bruto concertos</div>
+                            <div class="numero_geral"> <em> R$790 </em></div>
+                        </div>
+
+                        <div class="relatorio_geral_inside">
+                            <div class="texto_geral">Quantidade de exames</div>
+                            <div class="texto_geral"> <em> 790 </em></div>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="tabs_container">
-                        <div class="tabs">
-                            <input type="radio" class="tabs__radio" name="partes" id="vendas" checked>
-                            <label class="tabs__label" for="vendas">Vendas</label>
-                            <div class="tabs__content">
 
-                                <div class="relatorio_geral_inside">
-                                    <div class="texto_geral">Quantidade de Vendas</div>
-                                    <div class="numero_inside"> <em> 36 </em></div>
-                                </div>
+                <div class="tabs_container">
+                    <div class="tabs">
+                        <input type="radio" class="tabs__radio" name="partes" id="vendas" checked>
+                        <label class="tabs__label" for="vendas">Vendas</label>
+                        <div class="tabs__content">
 
-                                <div class="relatorio_geral_inside">
-                                    <div class="texto_geral">Total Recebido</div>
-                                    <div class="numero_geral"> <em> R$790 </em></div>
-                                </div>
+                            <div class="relatorio_geral_inside">
+                                <div class="texto_geral">Quantidade de Vendas</div>
+                                <div class="numero_inside"> <em> 36 </em></div>
+                            </div>
 
-                                <div class="relatorio_geral_inside">
-                                    <div class="texto_geral">Total a Receber</div>
-                                    <div class="numero_geral"> <em> R$790 </em></div>
-                                </div>
+                            <div class="relatorio_geral_inside">
+                                <div class="texto_geral">Total Recebido</div>
+                                <div class="numero_geral"> <em> R$790 </em></div>
+                            </div>
 
-                                <div class="relatorio_geral_inside">
-                                    <div class="texto_geral">Lucro Bruto</div>
-                                    <div class="numero_geral"> <em> R$790 </em></div>
-                                </div>
+                            <div class="relatorio_geral_inside">
+                                <div class="texto_geral">Total a Receber</div>
+                                <div class="numero_geral"> <em> R$790 </em></div>
+                            </div>
 
-                                <div class="tabs_inside">
+                            <div class="relatorio_geral_inside">
+                                <div class="texto_geral">Lucro Bruto</div>
+                                <div class="numero_geral"> <em> R$790 </em></div>
+                            </div>
 
-                                    <input type="radio" class="tabs__radio" name="pagamento" checked id="pagamentos">
-                                    <label class="tabs__label-inside" for="pagamentos">Pagamentos</label>
-                                    <div class="tabs__content_inside">
-                                        <div class="relatorio_geral_inside">
-                                            <div class="texto_geral">Pagas</div>
-                                            <div class="numero_inside"> <em> 29 </em></div>
-                                        </div>
+                            <div class="tabs_inside">
 
-                                        <div class="relatorio_geral_inside">
-                                            <div class="texto_geral">Não pagas</div>
-                                            <div class="numero_inside"> <em> 29 </em></div>
-                                        </div>
-
-                                        <div class="relatorio_geral_inside">
-                                            <div class="texto_geral">Pagas no cartão</div>
-                                            <div class="numero_inside"> <em> 14 </em></div>
-                                        </div>
-
-                                        <div class="relatorio_geral_inside">
-                                            <div class="texto_geral">Pagas no dinheiro</div>
-                                            <div class="numero_inside"> <em> 14 </em></div>
-                                        </div>
-
-                                        <div class="relatorio_geral_inside">
-                                            <div class="texto_geral">Pagas no dinheiro e cartão</div>
-                                            <div class="numero_inside"> <em> 14 </em></div>
-                                        </div>
-
-                                        <div class="relatorio_geral_inside">
-                                            <div class="texto_geral">Pagas via Pix</div>
-                                            <div class="numero_inside"> <em> 14 </em></div>
-                                        </div>
-
-                                        <div class="relatorio_geral_inside">
-                                            <div class="texto_geral">Pagas via transferência</div>
-                                            <div class="numero_inside"> <em> 14 </em></div>
-                                        </div>
-
+                                <input type="radio" class="tabs__radio" name="pagamento" checked id="pagamentos">
+                                <label class="tabs__label-inside" for="pagamentos">Pagamentos</label>
+                                <div class="tabs__content_inside">
+                                    <div class="relatorio_geral_inside">
+                                        <div class="texto_geral">Pagas</div>
+                                        <div class="numero_inside"> <em> 29 </em></div>
                                     </div>
+
+                                    <div class="relatorio_geral_inside">
+                                        <div class="texto_geral">Não pagas</div>
+                                        <div class="numero_inside"> <em> 29 </em></div>
+                                    </div>
+
+                                    <div class="relatorio_geral_inside">
+                                        <div class="texto_geral">Pagas no cartão</div>
+                                        <div class="numero_inside"> <em> 14 </em></div>
+                                    </div>
+
+                                    <div class="relatorio_geral_inside">
+                                        <div class="texto_geral">Pagas no dinheiro</div>
+                                        <div class="numero_inside"> <em> 14 </em></div>
+                                    </div>
+
+                                    <div class="relatorio_geral_inside">
+                                        <div class="texto_geral">Pagas no dinheiro e cartão</div>
+                                        <div class="numero_inside"> <em> 14 </em></div>
+                                    </div>
+
+                                    <div class="relatorio_geral_inside">
+                                        <div class="texto_geral">Pagas via Pix</div>
+                                        <div class="numero_inside"> <em> 14 </em></div>
+                                    </div>
+
+                                    <div class="relatorio_geral_inside">
+                                        <div class="texto_geral">Pagas via transferência</div>
+                                        <div class="numero_inside"> <em> 14 </em></div>
+                                    </div>
+
                                 </div>
+                            </div>
 
-                                <div class="tabs_inside">
+                            <div class="tabs_inside">
 
-                                    <input type="radio" class="tabs__radio" name="partes_venda" checked id="armacoes">
-                                    <label class="tabs__label-inside" for="armacoes">Armações</label>
-                                    <div class="tabs__content_inside">
-                                        <div class="relatorio_geral_inside">
-                                            <div class="texto_geral">Lucro bruto</div>
-                                            <div class="numero_geral"> <em> 14 </em></div>
-                                        </div>
+                                <input type="radio" class="tabs__radio" name="partes_venda" checked id="armacoes">
+                                <label class="tabs__label-inside" for="armacoes">Armações</label>
+                                <div class="tabs__content_inside">
+                                    <div class="relatorio_geral_inside">
+                                        <div class="texto_geral">Lucro bruto</div>
+                                        <div class="numero_geral"> <em> 14 </em></div>
+                                    </div>
 
-                                        <div class="tabs_inside">
+                                    <div class="tabs_inside">
 
-                                            <input type="radio" class="tabs__radio" name="mais_vendida" checked
-                                                id="pagamentos">
-                                            <label class="tabs__label_inside_mais_vendida" for="pagamentos">Mais Vendidas</label>
-                                            <div class="tabs__content_inside">
-                                                <div class="relatorio_geral_inside">
-                                                    <div class="texto_geral">1º</div>
-                                                    <div class="numero_inside"> <em> Life Glasses </em></div>
-                                                </div>                             
-                                                <div class="relatorio_geral_inside">
-                                                    <div class="texto_geral">2º</div>
-                                                    <div class="numero_inside"> <em> Oakley </em></div>
-                                                </div>                             
-                                                <div class="relatorio_geral_inside">
-                                                    <div class="texto_geral">3º</div>
-                                                    <div class="numero_inside"> <em> Menina Bela </em></div>
-                                                </div>                             
-
+                                        <input type="radio" class="tabs__radio" name="mais_vendida" checked
+                                            id="pagamentos">
+                                        <label class="tabs__label_inside_mais_vendida" for="pagamentos">Mais
+                                            Vendidas</label>
+                                        <div class="tabs__content_inside">
+                                            <div class="accordion">
+                                                <button type="button" class="accordion__button_inside">
+                                                    1º <span class="accordion_button_text"> Menina Bela </span></button>
+                                                <div class="accordion_content_inside">
+                                                    <div class="relatorio_geral_inside_inside">
+                                                        <div class="texto_geral">Lucro bruto</div>
+                                                        <div class="numero_geral"> <em> R$14 </em></div>
+                                                    </div>
+                                                    <div class="relatorio_geral_inside_inside">
+                                                        <div class="texto_geral">Quantidade vendida</div>
+                                                        <div class="texto_geral"> <em> 14 </em></div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                            <div class="accordion">
+                                                <button type="button" class="accordion__button_inside">
+                                                    2º <span class="accordion_button_text"> Menina Bela </span></button>
+                                                <div class="accordion_content_inside">
+                                                    <div class="relatorio_geral_inside_inside">
+                                                        <div class="texto_geral">Lucro bruto</div>
+                                                        <div class="numero_geral"> <em> R$14 </em></div>
+                                                    </div>
+                                                    <div class="relatorio_geral_inside_inside">
+                                                        <div class="texto_geral">Quantidade vendida</div>
+                                                        <div class="texto_geral"> <em> 14 </em></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion">
+                                                <button type="button" class="accordion__button_inside">
+                                                    3º <span class="accordion_button_text"> Menina Bela </span></button>
+                                                <div class="accordion_content_inside">
+                                                    <div class="relatorio_geral_inside_inside">
+                                                        <div class="texto_geral">Lucro bruto</div>
+                                                        <div class="numero_geral"> <em> R$14 </em></div>
+                                                    </div>
+                                                    <div class="relatorio_geral_inside_inside">
+                                                        <div class="texto_geral">Quantidade vendida</div>
+                                                        <div class="texto_geral"> <em> 14 </em></div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
+                                        </div>
                                     </div>
 
-                                    <input type="radio" class="tabs__radio" name="partes_venda" id="lente">
-                                    <label class="tabs__label-inside" for="lente">Lentes</label>
-                                    <div class="tabs__content_inside"> Lentes </div>
+                                </div>
+
+                                <input type="radio" class="tabs__radio" name="partes_venda" id="lente">
+                                <label class="tabs__label-inside" for="lente">Lentes</label>
+                                <div class="tabs__content_inside">
+                                    <div class="relatorio_geral_inside">
+                                        <div class="texto_geral">Lucro bruto</div>
+                                        <div class="numero_geral"> <em> 14 </em></div>
+                                    </div>
+
+                                    <div class="tabs_inside">
+
+                                        <input type="radio" class="tabs__radio" name="mais_vendida_lentes" checked 
+                                            id="pagamentos">
+                                        <label class="tabs__label_inside_mais_vendida" for="pagamentos">Mais
+                                            Vendidas</label>
+                                        <div class="tabs__content_inside">
+                                            <div class="accordion">
+                                                <button type="button" class="accordion__button_inside">
+                                                    1º <span class="accordion_button_text"> Resina Blue cut </span></button>
+                                                <div class="accordion_content_inside">
+                                                    <div class="relatorio_geral_inside_inside">
+                                                        <div class="texto_geral">Lucro bruto</div>
+                                                        <div class="numero_geral"> <em> R$14 </em></div>
+                                                    </div>
+                                                    <div class="relatorio_geral_inside_inside">
+                                                        <div class="texto_geral">Quantidade vendida</div>
+                                                        <div class="texto_geral"> <em> 14 </em></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion">
+                                                <button type="button" class="accordion__button_inside">
+                                                    2º <span class="accordion_button_text"> Resina Blue cut </span></button>
+                                                <div class="accordion_content_inside">
+                                                    <div class="relatorio_geral_inside_inside">
+                                                        <div class="texto_geral">Lucro bruto</div>
+                                                        <div class="numero_geral"> <em> R$14 </em></div>
+                                                    </div>
+                                                    <div class="relatorio_geral_inside_inside">
+                                                        <div class="texto_geral">Quantidade vendida</div>
+                                                        <div class="texto_geral"> <em> 14 </em></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion">
+                                                <button type="button" class="accordion__button_inside">
+                                                    3º <span class="accordion_button_text"> Resina Blue cut </span></button>
+                                                <div class="accordion_content_inside">
+                                                    <div class="relatorio_geral_inside_inside">
+                                                        <div class="texto_geral">Lucro bruto</div>
+                                                        <div class="numero_geral"> <em> R$14 </em></div>
+                                                    </div>
+                                                    <div class="relatorio_geral_inside_inside">
+                                                        <div class="texto_geral">Quantidade vendida</div>
+                                                        <div class="texto_geral"> <em> 14 </em></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
 
                                 </div>
 
                             </div>
 
-                            <input type="radio" class="tabs__radio" name="partes" id="concertos">
-                            <label class="tabs__label" for="concertos">Concertos</label>
-                            <div class="tabs__content"> Concertos </div>
-
-                            <input type="radio" class="tabs__radio" name="partes" id="exames">
-                            <label class="tabs__label" for="exames">Exames</label>
-                            <div class="tabs__content"> Exames </div>
-
                         </div>
-                    </div>
 
+                        <input type="radio" class="tabs__radio" name="partes" id="concertos">
+                        <label class="tabs__label" for="concertos">Concertos</label>
+                        <div class="tabs__content"> Concertos </div>
+
+                        <input type="radio" class="tabs__radio" name="partes" id="exames">
+                        <label class="tabs__label" for="exames">Exames</label>
+                        <div class="tabs__content"> Exames </div>
+
+                    </div>
                 </div>
-                <form class="my-5" action="/relatorios/index/gera-relatorio" method="POST">
 
-                    <div class="row g-3 mb-3">
-                        <div class="col">
-                            <label for="de" class="form-label">De:</label>
-                            <input type="date" name="de" class="form-control">
-                        </div>
+            </div>
+            <form class="my-5" action="/relatorios/index/gera-relatorio" method="POST">
 
-                        <div class="col">
-                            <label for="ate" class="form-label">Até:</label>
-                            <input type="date" name="ate" class="form-control">
-                        </div>
+                <div class="row g-3 mb-3">
+                    <div class="col">
+                        <label for="de" class="form-label">De:</label>
+                        <input type="date" name="de" class="form-control">
                     </div>
 
-                    <button type="submit" class="btn btn-primary my-5">Gerar Relatório</button>
-                </form>
-            </div>
+                    <div class="col">
+                        <label for="ate" class="form-label">Até:</label>
+                        <input type="date" name="ate" class="form-control">
+                    </div>
+                </div>
 
-
-
-
-
-
-            <div class="col-lg-2"></div>
+                <button type="submit" class="btn btn-primary my-5">Gerar Relatório</button>
+            </form>
         </div>
+
+
+
+
+
+
+        <div class="col-lg-2"></div>
+    </div>
     </div>
 
 

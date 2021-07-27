@@ -336,7 +336,7 @@ nav .navbar .links li:hover .htmlCss-sub-menu, nav .navbar .links li:hover .js-s
   }
 }
 
-.NomeIndex , .posicao{
+.NomeIndex, .posicao {
   text-decoration: none;
   color: rgb(14, 14, 14);
   font-weight: 600;
@@ -778,7 +778,7 @@ label {
   margin-bottom: 20px;
 }
 
-.relatorio_container{
+.relatorio_container {
   padding: 5px;
   display: flex;
   flex-wrap: wrap;
@@ -786,13 +786,13 @@ label {
   align-items: center;
 }
 
-.tabs_container{
+.tabs_container {
   background: #b4b4b4;
   border-radius: 6px;
   width: 100%;
 }
 
-.relatorio_geral{
+.relatorio_geral {
   margin-bottom: 10px;
   background: #b4b4b4;
   height: 80px;
@@ -804,22 +804,22 @@ label {
   align-items: center;
 }
 
-.relatorio_geral{
-  margin-bottom: 10px;
-  background: #b4b4b4;
-  height: 80px;
-  border-radius: 6px;
-  width: 100%;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.relatorio_geral_inside{
+.relatorio_geral_inside {
   margin-bottom: 10px;
   background: #b4b4b4;
   height: 40px;
+  border-radius: 6px;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.relatorio_geral_inside_inside {
+  margin-bottom: 10px;
+  background: #b4b4b4;
+  height: 25px;
   border-radius: 6px;
   width: 100%;
   padding: 10px;
@@ -834,12 +834,12 @@ label {
   font-size: 0.9em;
   padding: 0 15px;
 }
-.numero_geral{
+
+.numero_geral {
   color: rgb(0, 121, 0);
 }
 
-
-.tabs{
+.tabs {
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
@@ -848,7 +848,7 @@ label {
   padding: 10px;
 }
 
-.tabs_inside{
+.tabs_inside {
   align-items: center;
   justify-content: center;
   display: flex;
@@ -857,7 +857,7 @@ label {
   font-family: 'Poppins', sans-serif;
 }
 
-.tabs__label_inside_mais_vendida{
+.tabs__label_inside_mais_vendida {
   align-items: center;
   justify-content: left;
   display: flex;
@@ -866,20 +866,20 @@ label {
   font-family: 'Poppins', sans-serif;
 }
 
-.tabs__label{
+.tabs__label {
   padding: 10px 16px;
   color: #000000;
 }
 
-.tabs__label-inside{
+.tabs__label-inside {
   padding: 7px 13px;
 }
 
-.tabs__radio{
+.tabs__radio {
   display: none;
 }
 
-.tabs__content{
+.tabs__content {
   background: #c7c7c7;
   color: #000000;
   padding: 10px;
@@ -893,7 +893,7 @@ label {
   display: none;
 }
 
-.tabs__content_inside, .tabs__content_inside_mais_vendida{
+.tabs__content_inside, .tabs__content_inside_mais_vendida {
   background: #c7c7c7;
   color: #000000;
   padding: 10px;
@@ -906,16 +906,120 @@ label {
   display: none;
 }
 
-.tabs__radio:checked+.tabs__label,
-.tabs__radio:checked+.tabs__label-inside,
-.tabs__radio:checked+.tabs__label_inside_mais_vendida{
+.tabs__radio:checked+.tabs__label, .tabs__radio:checked+.tabs__label-inside, .tabs__radio:checked+.tabs__label_inside_mais_vendida {
   font-weight: bold;
   color: rgb(0, 121, 0);
   border-bottom: 3px solid rgb(0, 121, 0);
 }
 
-.tabs__radio:checked+.tabs__label+.tabs__content,
-.tabs__radio:checked+.tabs__label-inside+.tabs__content_inside,
-.tabs__radio:checked+.tabs__label_inside_mais_vendida+.tabs__content_inside{
+.tabs__radio:checked+.tabs__label+.tabs__content, .tabs__radio:checked+.tabs__label-inside+.tabs__content_inside, .tabs__radio:checked+.tabs__label_inside_mais_vendida+.tabs__content_inside {
   display: initial;
 }
+
+.accordion__button {
+  background: #b4b4b4;
+  height: 80px;
+  border-radius: 6px;
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: #000000;
+  font-weight: bold;
+  font-size: 0.9em;
+  padding: 0 15px;
+  transition: background 0.2s;
+}
+
+.accordion__button_inside {
+  background: #b4b4b4;
+  height: 40px;
+  border-radius: 6px;
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: #000000;
+  font-weight: bold;
+  font-size: 0.9em;
+  padding: 0 15px;
+  transition: background 0.2s;
+}
+
+.accordion_button_number {
+  float: right;
+  color: rgb(0, 121, 0);
+}
+
+.accordion_button_text {
+  float: right;
+  color: #000000;
+}
+
+.accordion__button::after {
+  content: '\25BC';
+  float: left;
+  color: #000000;
+  padding: 0 10px;
+  transition: all 0.4s ease-in-out;
+}
+
+.accordion__button_inside::after {
+  content: '\25BC';
+  float: left;
+  color: #000000;
+  padding: 0 10px;
+  transition: all 0.4s ease-in-out;
+}
+
+.accordion__button--active {
+  background: #c7c7c7;
+}
+
+.accordion__button--active::after {
+  transform: rotate(180deg);
+}
+
+.accordion__button--active_inside {
+  background: #b4b4b4;
+}
+
+.accordion__button--active_inside::after {
+  transform: rotate(180deg);
+}
+
+.accordion_content_inside {
+  overflow: hidden;
+  max-height: 0px;
+  padding: 0px;
+  font-family: 'Poppins', sans-serif;
+  transition: max-height 0.3s;
+  transition: padding 0.2s;
+  background: #c4c4c4;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+.accordion_content {
+  overflow: hidden;
+  max-height: 0px;
+  padding: 0px;
+  font-family: 'Poppins', sans-serif;
+  transition: max-height 0.3s;
+  transition: padding 0.2s;
+  background: #c7c7c7;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+.accordion_content_active{
+  max-height: 400px;
+  padding: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+

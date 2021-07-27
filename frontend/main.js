@@ -182,3 +182,34 @@ if (tr__servico) {
         })
     })
 }
+
+const accordions_buttons = document.querySelectorAll('.accordion__button')
+const accordions_buttons_inside = document.querySelectorAll('.accordion__button_inside')
+
+if (accordions_buttons) {
+    accordions_buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            button.classList.toggle('accordion__button--active');
+            const accordionContent = button.nextElementSibling;
+            if (button.classList.contains('accordion__button--active')) {
+                accordionContent.classList.add('accordion_content_active')
+            } else {
+                accordionContent.classList.remove('accordion_content_active')
+            }
+
+        });
+    });
+
+    accordions_buttons_inside.forEach(button => {
+        button.addEventListener('click', () => {
+            button.classList.toggle('accordion__button--active_inside');
+            const accordionContent = button.nextElementSibling;
+            if (button.classList.contains('accordion__button--active_inside')) {
+                accordionContent.classList.add('accordion_content_active')
+            } else {
+                accordionContent.classList.remove('accordion_content_active')
+            }
+
+        });
+    });
+}
