@@ -69,6 +69,7 @@ Servico.relatorio = async function (DeData, AteData) {
 }
 
 Servico.searchLentes = async function(DeData, AteData){
+    if(!DeData || !AteData) return await ServicoModel.find({ lente: 1, esfOd: 1, esfOe: 1, cilOd: 1, cilOe: 1}).sort({ CriadoEm: -1 });
     if(DeData == AteData)  return await ServicoModel.find({CriadoEm:  new Date(DeData)}, { lente: 1, esfOd: 1, esfOe: 1, cilOd: 1, cilOe: 1});
     return await ServicoModel.find({CriadoEm: {"$gte": new Date(DeData) , "$lte": new Date(AteData)}}, { lente: 1, esfOd: 1, esfOe: 1, cilOd: 1, cilOe: 1});
 }
@@ -441,6 +442,21 @@ Servico.prototype.criaPdf = function () {
                         ],
                         [
                             {
+                                text: `${this.body.lenteContato}`,
+                                border: [false, false, false, true],
+                                margin: [0, 5, 0, 5],
+                                alignment: 'left',
+                            },
+                            {
+                                text: `${this.body.valorLenContato}`,
+                                border: [false, false, false, true],
+                                fillColor: '#f5f5f5',
+                                alignment: 'right',
+                                margin: [0, 5, 0, 5],
+                            },
+                        ],
+                        [
+                            {
                                 text: 'TOTAL',
                                 border: [false, false, false, true],
                                 margin: [0, 5, 0, 5],
@@ -696,6 +712,26 @@ Servico.prototype.criaPdf = function () {
                             {
                                 columns: [
                                     {
+                                        text: 'Cliente: ',
+                                        color: '#aaaaab',
+                                        bold: true,
+                                        width: '*',
+                                        fontSize: 12,
+                                        alignment: 'right',
+                                    },
+                                    {
+                                        text: `${this.body.nome}`,
+                                        bold: true,
+                                        color: '#333333',
+                                        fontSize: 12,
+                                        alignment: 'right',
+                                        width: 100,
+                                    },
+                                ],
+                            },
+                            {
+                                columns: [
+                                    {
                                         text: 'Data',
                                         color: '#aaaaab',
                                         bold: true,
@@ -802,7 +838,6 @@ Servico.prototype.criaPdf = function () {
 
     return dd
 }
-
 
 
 const formataData = (dia, mes) => {

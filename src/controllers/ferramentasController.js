@@ -29,8 +29,8 @@ exports.geraLista = async (req, res) => {
 }
 
 exports.relatorioIndex = async (req, res) => {
-  
-  res.render('relatorios')
+  var relatorio = await Relatorio.geraRelatorio()
+  res.render('relatorios', { relatorio })
 }
 
 exports.geraRelatorio = async (req, res) => {

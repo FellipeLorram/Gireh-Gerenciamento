@@ -859,7 +859,7 @@ label {
 
 .tabs__label_inside_mais_vendida {
   align-items: center;
-  justify-content: left;
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -870,6 +870,7 @@ label {
   padding: 10px 16px;
   color: #000000;
 }
+
 
 .tabs__label-inside {
   padding: 7px 13px;
@@ -977,7 +978,8 @@ label {
 }
 
 .accordion__button--active {
-  background: #c7c7c7;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .accordion__button--active::after {
@@ -986,6 +988,8 @@ label {
 
 .accordion__button--active_inside {
   background: #b4b4b4;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .accordion__button--active_inside::after {
@@ -997,8 +1001,7 @@ label {
   max-height: 0px;
   padding: 0px;
   font-family: 'Poppins', sans-serif;
-  transition: max-height 0.3s;
-  transition: padding 0.2s;
+  transition: max-height 0.3s, padding 0.2s ease-in-out;
   background: #c4c4c4;
   margin-bottom: 10px;
   border-radius: 6px;
@@ -1009,17 +1012,15 @@ label {
   max-height: 0px;
   padding: 0px;
   font-family: 'Poppins', sans-serif;
-  transition: max-height 0.3s;
-  transition: padding 0.2s;
+  transition: max-height 0.3s, padding 0.2s ease-in-out;
   background: #c7c7c7;
   margin-bottom: 10px;
   border-radius: 6px;
 }
 
-.accordion_content_active{
+.accordion_content_active {
   max-height: 400px;
   padding: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-

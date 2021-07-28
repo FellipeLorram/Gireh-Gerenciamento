@@ -240,6 +240,29 @@
             </tbody>
           </table>
 
+          <% if(servico.lenteContato !== '' ){ %>
+          <table class="table2">
+            <tbody>
+              <% if(servico.lenteContato=='' ){ %>
+                <td data-label="Lente de contato"> Não Preenchido </td>
+                <% }else{ %>
+                  <td data-label="Lente de contato">
+                    <%=servico.lenteContato%>
+                  </td>
+                  <% } %>
+
+                    <% if(servico.valorLenContato=='' ){ %>
+                      <td data-label="Valor"> Não Preenchido </td>
+                      <% }else{ %>
+                        <td data-label="Valor">
+                          <%=servico.valorLenContato%>
+                        </td>
+                        <% } %>
+
+            </tbody>
+          </table>
+          <% } %>
+
           <table class="table2">
             <tbody>
               <tr>

@@ -8,7 +8,7 @@ exports.relatorio = async function (DeData, AteData) {
         const Adata = AteData.split('-')
         AteData = `${Adata[0]}-${Adata[1]}-${Number(Adata[2]) + 1}`
         let data = ''
-        
+
         const servicos = await Servico.relatorio(DeData, AteData);
         const lentes = await Servico.searchLentes(DeData, AteData);
         const concertos = await Concerto.relatorio(DeData, AteData)
@@ -23,6 +23,97 @@ exports.relatorio = async function (DeData, AteData) {
     } catch (e) {
         console.log(e)
     }
+
+}
+
+exports.geraRelatorio = async (DeData, AteData) => {
+    const servicos = await Servico.searchServicos();
+    const lentes = await Servico.searchLentes();
+    const concertos = await Concerto.searchConcertos()
+    const exames = await Ficha.searchFichas();
+
+    let mVendida = 0
+    let strMVendida = ''
+    for (let l in lentes) {
+        if (lentes[l].length > mVendida) {
+            mVendida = lentes[l].length
+            strMVendida = l
+        }
+    }
+
+    const relatorio = {
+        qtdVenda: 0,
+        vendasPagas: 0,
+        vendasNaoPagas: 0,
+
+        vendasPagasDinheiro: 0,
+        vendasPagasTransferencia: 0,
+        vendasPagasDinheiroEcartao: 0,
+        vendasPagasPix: 0,
+        vendasPagasCartao: 0,
+
+        valorAreceber: 0,
+        valorRecebido: 0,
+
+        lucroVendas: 0,
+
+        qtdConcertos: 0,
+        qtdSolda: 0,
+        qtdMola: 0,
+        qtdParafuso: 0,
+        qtdPlaqueta: 0,
+        qtdPassagem: 0,
+        concertosNaoPagos: 0,
+        concertosPagos: 0,
+        lucroConcertos: 0,
+
+        qtdExames: 0,
+        qtdClientesAtendidos: 0,
+        qtdClientesNaoAtendidos: 0,
+
+        lucroBruto: 0,
+    }
+
+    for (servico of servicos) {
+        relatorio.qtdVenda++;
+
+        if (servico.pago == 'Pago') relatorio.vendasPagas++;
+        else relatorio.vendasNaoPagas++;
+
+        if (servico.formaPagamento == 'Dinheiro') relatorio.vendasPagasDinheiro++;
+        else if (servico.formaPagamento == 'Cartão') relatorio.vendasPagasCartao++;
+        else if (servico.formaPagamento == 'Dinheiro e Cartão') relatorio.vendasPagasDinheiroEcartao++;
+        else if (servico.formaPagamento == 'Pix') relatorio.vendasPagasPix++;
+        else if (servico.formaPagamento == 'Transferência') relatorio.vendasPagasTransferencia++;
+
+        relatorio.valorAreceber += Number(servico.resta);
+        relatorio.lucroVendas += Number(servico.total);
+    }
+
+    for (concerto of concertos) {
+        relatorio.qtdConcertos++;
+        relatorio.lucroConcertos += Number(concerto.valor)
+        if (concerto.pago == 'Não Pago') relatorio.concertosNaoPagos++;
+        if (concerto.pago == 'Pago') relatorio.concertosPagos++;
+
+        if (concerto.tipo == 'Solda') relatorio.qtdSolda++;
+        if (concerto.tipo == 'Mola') relatorio.qtdMola++;
+        if (concerto.tipo == 'Parafuso') relatorio.qtdParafuso++;
+        if (concerto.tipo == 'Plaqueta') relatorio.qtdPlaqueta++;
+        if (concerto.tipo == 'Passagem') relatorio.qtdPassagem++;
+
+    }
+
+    for (exame of exames) {
+        relatorio.qtdExames++;
+        if (exame.atendido == 'Atendido') relatorio.qtdClientesAtendidos++;
+        if (exame.atendido == 'Não Atendido') relatorio.qtdClientesNaoAtendidos++;
+    }
+
+    relatorio.lucroBruto += Number(relatorio.lucroConcertos) + Number(relatorio.lucroVendas)
+    relatorio.valorRecebido = Number(relatorio.lucroVendas) - Number(relatorio.valorAreceber)
+
+    return relatorio;
 
 }
 
