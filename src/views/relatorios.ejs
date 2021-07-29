@@ -93,21 +93,21 @@
 
                     <div class="accordion">
                         <button type="button" class="accordion__button">Geral <span class="accordion_button_number">
-                                <em> R$<%= relatorio.lucroBruto %> </em></span></button>
+                                <em> <%= relatorio.lucroBruto.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}); %> </em></span></button>
                         <div class="accordion_content">
                             <div class="relatorio_geral_inside">
                                 <div class="texto_geral">Vendas</div>
-                                <div class="numero_inside"> <em> 36 </em></div>
+                                <div class="numero_geral"> <em> <%= relatorio.lucroVendas.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}); %> </em></div>
                             </div>
 
                             <div class="relatorio_geral_inside">
                                 <div class="texto_geral">Concertos</div>
-                                <div class="numero_geral"> <em> R$790 </em></div>
+                                <div class="numero_geral"> <em> <%= relatorio.lucroConcertos.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}); %> </em></div>
                             </div>
 
                             <div class="relatorio_geral_inside">
                                 <div class="texto_geral">Exames</div>
-                                <div class="texto_geral"> <em> 790 </em></div>
+                                <div class="texto_geral"> <em> <%= relatorio.qtdExames %></em></div>
                             </div>
                         </div>
                     </div>
@@ -121,22 +121,22 @@
 
                                 <div class="relatorio_geral_inside">
                                     <div class="texto_geral">Quantidade</div>
-                                    <div class="numero_inside"> <em> 36 </em></div>
+                                    <div class="numero_inside"> <em> <%= relatorio.qtdVenda %> </em></div>
                                 </div>
 
                                 <div class="relatorio_geral_inside">
                                     <div class="texto_geral">Recebido</div>
-                                    <div class="numero_geral"> <em> R$790 </em></div>
+                                    <div class="numero_geral"> <em> <%= relatorio.valorRecebido.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}); %> </em></div>
                                 </div>
 
                                 <div class="relatorio_geral_inside">
                                     <div class="texto_geral">A Receber</div>
-                                    <div class="numero_geral"> <em> R$790 </em></div>
+                                    <div class="numero_geral"> <em> <%= relatorio.valorAreceber.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}); %> </em></div>
                                 </div>
 
                                 <div class="relatorio_geral_inside">
                                     <div class="texto_geral">Lucro Bruto</div>
-                                    <div class="numero_geral"> <em> R$790 </em></div>
+                                    <div class="numero_geral"> <em> <%= relatorio.lucroVendas.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}); %> </em></div>
                                 </div>
 
                                 <div class="tabs_inside">
@@ -146,37 +146,41 @@
                                     <div class="tabs__content_inside">
                                         <div class="relatorio_geral_inside">
                                             <div class="texto_geral">Pagas</div>
-                                            <div class="numero_inside"> <em> 29 </em></div>
+                                            <div class="numero_inside"> <em> <%= relatorio.vendasPagas %> </em></div>
                                         </div>
 
                                         <div class="relatorio_geral_inside">
                                             <div class="texto_geral">Não pagas</div>
-                                            <div class="numero_inside"> <em> 29 </em></div>
+                                            <div class="numero_inside"> <em> <%= relatorio.vendasNaoPagas %> </em></div>
                                         </div>
 
                                         <div class="relatorio_geral_inside">
                                             <div class="texto_geral">Pagas no cartão</div>
-                                            <div class="numero_inside"> <em> 14 </em></div>
+                                            <div class="numero_inside"> <em> <%= relatorio.vendasPagasCartao %> </em></div>
                                         </div>
 
                                         <div class="relatorio_geral_inside">
                                             <div class="texto_geral">Pagas no dinheiro</div>
-                                            <div class="numero_inside"> <em> 14 </em></div>
+                                            <div class="numero_inside"> <em> <%= relatorio.vendasPagasDinheiro %> </em></div>
                                         </div>
 
                                         <div class="relatorio_geral_inside">
                                             <div class="texto_geral">Pagas no dinheiro e cartão</div>
-                                            <div class="numero_inside"> <em> 14 </em></div>
+                                            <div class="numero_inside"> <em> <%= relatorio.vendasPagasDinheiroEcartao %> </em></div>
                                         </div>
 
                                         <div class="relatorio_geral_inside">
                                             <div class="texto_geral">Pagas via Pix</div>
-                                            <div class="numero_inside"> <em> 14 </em></div>
+                                            <div class="numero_inside"> <em> <%= relatorio.vendasPagasPix %> </em></div>
                                         </div>
 
                                         <div class="relatorio_geral_inside">
                                             <div class="texto_geral">Pagas via transferência</div>
-                                            <div class="numero_inside"> <em> 14 </em></div>
+                                            <div class="numero_inside"> <em> <%= relatorio.vendasPagasTransferencia %> </em></div>
+                                        </div>
+                                        <div class="relatorio_geral_inside">
+                                            <div class="texto_geral">Não especificado</div>
+                                            <div class="numero_inside"> <em> <%= relatorio.naoEpecificado %> </em></div>
                                         </div>
 
                                     </div>
@@ -255,7 +259,7 @@
                                     <div class="tabs__content_inside">
                                         <div class="relatorio_geral_inside">
                                             <div class="texto_geral">Lucro bruto</div>
-                                            <div class="numero_geral"> <em> 14 </em></div>
+                                            <div class="numero_geral"> <em> <%= relatorio.lentesMaisVendidas.lcBruto.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}); %> </em></div>
                                         </div>
 
                                         <div class="tabs_inside">
@@ -267,46 +271,46 @@
                                             <div class="tabs__content_inside">
                                                 <div class="accordion">
                                                     <button type="button" class="accordion__button_inside">
-                                                        1º <span class="accordion_button_text"> Resina Blue cut
+                                                        1º <span class="accordion_button_text"> <%= relatorio.lentesMaisVendidas.primeiro.lente %>
                                                         </span></button>
                                                     <div class="accordion_content_inside">
                                                         <div class="relatorio_geral_inside_inside">
                                                             <div class="texto_geral">Lucro bruto</div>
-                                                            <div class="numero_geral"> <em> R$14 </em></div>
+                                                            <div class="numero_geral"> <em> <%= relatorio.lentesMaisVendidas.primeiro.lucroBruto.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}); %> </em></div>
                                                         </div>
                                                         <div class="relatorio_geral_inside_inside">
                                                             <div class="texto_geral">Quantidade vendida</div>
-                                                            <div class="texto_geral"> <em> 14 </em></div>
+                                                            <div class="texto_geral"> <em> <%= relatorio.lentesMaisVendidas.primeiro.qtd %> </em></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="accordion">
                                                     <button type="button" class="accordion__button_inside">
-                                                        2º <span class="accordion_button_text"> Resina Blue cut
+                                                        2º <span class="accordion_button_text"> <%= relatorio.lentesMaisVendidas.segundo.lente %>
                                                         </span></button>
                                                     <div class="accordion_content_inside">
                                                         <div class="relatorio_geral_inside_inside">
                                                             <div class="texto_geral">Lucro bruto</div>
-                                                            <div class="numero_geral"> <em> R$14 </em></div>
+                                                            <div class="numero_geral"> <em> <%= relatorio.lentesMaisVendidas.segundo.lucroBruto.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}); %> </em></div>
                                                         </div>
                                                         <div class="relatorio_geral_inside_inside">
                                                             <div class="texto_geral">Quantidade vendida</div>
-                                                            <div class="texto_geral"> <em> 14 </em></div>
+                                                            <div class="texto_geral"> <em> <%= relatorio.lentesMaisVendidas.segundo.qtd %> </em></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="accordion">
                                                     <button type="button" class="accordion__button_inside">
-                                                        3º <span class="accordion_button_text"> Resina Blue cut
+                                                        3º <span class="accordion_button_text"> <%= relatorio.lentesMaisVendidas.terceiro.lente %>
                                                         </span></button>
                                                     <div class="accordion_content_inside">
                                                         <div class="relatorio_geral_inside_inside">
                                                             <div class="texto_geral">Lucro bruto</div>
-                                                            <div class="numero_geral"> <em> R$14 </em></div>
+                                                            <div class="numero_geral"> <em> <%= relatorio.lentesMaisVendidas.terceiro.lucroBruto.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}); %> </em></div>
                                                         </div>
                                                         <div class="relatorio_geral_inside_inside">
                                                             <div class="texto_geral">Quantidade vendida</div>
-                                                            <div class="texto_geral"> <em> 14 </em></div>
+                                                            <div class="texto_geral"> <em><%= relatorio.lentesMaisVendidas.terceiro.qtd %></em></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -326,22 +330,22 @@
 
                                 <div class="relatorio_geral_inside">
                                     <div class="texto_geral">Quantidade</div>
-                                    <div class="numero_inside"> <em> 36 </em></div>
+                                    <div class="numero_inside"> <em><%= relatorio.qtdConcertos %></em></div>
                                 </div>
 
                                 <div class="relatorio_geral_inside">
                                     <div class="texto_geral">Recebido</div>
-                                    <div class="numero_geral"> <em> R$790 </em></div>
+                                    <div class="numero_geral"> <em> <%= relatorio.concertosRecebido.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}); %> </em></div>
                                 </div>
 
                                 <div class="relatorio_geral_inside">
                                     <div class="texto_geral">A Receber</div>
-                                    <div class="numero_geral"> <em> R$790 </em></div>
+                                    <div class="numero_geral"> <em> <%= relatorio.concertosAReceber.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}); %> </em></div>
                                 </div>
 
                                 <div class="relatorio_geral_inside">
                                     <div class="texto_geral">Lucro Bruto</div>
-                                    <div class="numero_geral"> <em> R$790 </em></div>
+                                    <div class="numero_geral"> <em><%= relatorio.lucroConcertos.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}); %></em></div>
                                 </div>
 
                                 <div class="tabs_inside">
@@ -352,12 +356,12 @@
                                     <div class="tabs__content_inside">
                                         <div class="relatorio_geral_inside">
                                             <div class="texto_geral">Pagos</div>
-                                            <div class="numero_inside"> <em> 29 </em></div>
+                                            <div class="numero_inside"> <em> <%= relatorio.concertosPagos %></em></div>
                                         </div>
 
                                         <div class="relatorio_geral_inside">
                                             <div class="texto_geral">Não pagos</div>
-                                            <div class="numero_inside"> <em> 29 </em></div>
+                                            <div class="numero_inside"> <em> <%= relatorio.concertosNaoPagos %></em></div>
                                         </div>
 
                                     </div>
@@ -368,7 +372,7 @@
                                     <div class="tabs__content_inside">
                                         <div class="accordion">
                                             <button type="button" class="accordion__button_inside">
-                                                Soldas <span class="accordion_button_text"> 44 </span></button>
+                                                Soldas <span class="accordion_button_text"> <%= relatorio.qtdSolda %> </span></button>
                                             <div class="accordion_content_inside">
                                                 <div class="relatorio_geral_inside_inside">
                                                     <div class="texto_geral">Lucro bruto</div>

@@ -64,14 +64,14 @@ Servico.searchServicos = async function () {
 }
 
 Servico.relatorio = async function (DeData, AteData) {
-    if(DeData == AteData) return await ServicoModel.find({CriadoEm: new Date(DeData)});
-    return await ServicoModel.find({CriadoEm: {"$gte": new Date(DeData) , "$lte": new Date(AteData)}});
+    if (DeData == AteData) return await ServicoModel.find({ CriadoEm: new Date(DeData) });
+    return await ServicoModel.find({ CriadoEm: { "$gte": new Date(DeData), "$lte": new Date(AteData) } });
 }
 
-Servico.searchLentes = async function(DeData, AteData){
-    if(!DeData || !AteData) return await ServicoModel.find({ lente: 1, esfOd: 1, esfOe: 1, cilOd: 1, cilOe: 1}).sort({ CriadoEm: -1 });
-    if(DeData == AteData)  return await ServicoModel.find({CriadoEm:  new Date(DeData)}, { lente: 1, esfOd: 1, esfOe: 1, cilOd: 1, cilOe: 1});
-    return await ServicoModel.find({CriadoEm: {"$gte": new Date(DeData) , "$lte": new Date(AteData)}}, { lente: 1, esfOd: 1, esfOe: 1, cilOd: 1, cilOe: 1});
+Servico.searchLentes = async function (DeData, AteData) {
+    if (!DeData || !AteData) return await ServicoModel.find({}, { lente: 1, valorLen: 1, _id: 0 }).sort({ CriadoEm: -1 });
+    if (DeData == AteData) return await ServicoModel.find({ CriadoEm: new Date(DeData) }, { lente: 1, esfOd: 1, esfOe: 1, cilOd: 1, cilOe: 1 });
+    return await ServicoModel.find({ CriadoEm: { "$gte": new Date(DeData), "$lte": new Date(AteData) } }, { lente: 1, esfOd: 1, esfOe: 1, cilOd: 1, cilOe: 1 });
 }
 
 Servico.searchNameServicos = async function (Nome) {
@@ -843,10 +843,10 @@ Servico.prototype.criaPdf = function () {
 const formataData = (dia, mes) => {
     let fdia = ''
     let fmes = ''
-    if(dia < 10) fdia = `0${dia}`
+    if (dia < 10) fdia = `0${dia}`
     else fdia = `${dia}`
-    
-    if(mes < 10) fmes = `0${mes}`
+
+    if (mes < 10) fmes = `0${mes}`
     else fmes = `${mes}`
 
     return `${fdia}/${fmes}`

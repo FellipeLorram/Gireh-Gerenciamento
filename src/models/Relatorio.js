@@ -26,20 +26,10 @@ exports.relatorio = async function (DeData, AteData) {
 
 }
 
-exports.geraRelatorio = async (DeData, AteData) => {
+exports.geraRelatorio = async () => {
     const servicos = await Servico.searchServicos();
-    const lentes = await Servico.searchLentes();
     const concertos = await Concerto.searchConcertos()
     const exames = await Ficha.searchFichas();
-
-    let mVendida = 0
-    let strMVendida = ''
-    for (let l in lentes) {
-        if (lentes[l].length > mVendida) {
-            mVendida = lentes[l].length
-            strMVendida = l
-        }
-    }
 
     const relatorio = {
         qtdVenda: 0,
@@ -51,6 +41,9 @@ exports.geraRelatorio = async (DeData, AteData) => {
         vendasPagasDinheiroEcartao: 0,
         vendasPagasPix: 0,
         vendasPagasCartao: 0,
+        naoEpecificado: 0,
+
+        lenteMVendida: 0,
 
         valorAreceber: 0,
         valorRecebido: 0,
@@ -66,6 +59,9 @@ exports.geraRelatorio = async (DeData, AteData) => {
         concertosNaoPagos: 0,
         concertosPagos: 0,
         lucroConcertos: 0,
+        concertosAReceber: 0,
+        concertosRecebido: 0,
+
 
         qtdExames: 0,
         qtdClientesAtendidos: 0,
@@ -78,24 +74,28 @@ exports.geraRelatorio = async (DeData, AteData) => {
         relatorio.qtdVenda++;
 
         if (servico.pago == 'Pago') relatorio.vendasPagas++;
-        else relatorio.vendasNaoPagas++;
+        else if (servico.pago == 'Não pago') relatorio.vendasNaoPagas++;
 
-        if (servico.formaPagamento == 'Dinheiro') relatorio.vendasPagasDinheiro++;
-        else if (servico.formaPagamento == 'Cartão') relatorio.vendasPagasCartao++;
-        else if (servico.formaPagamento == 'Dinheiro e Cartão') relatorio.vendasPagasDinheiroEcartao++;
-        else if (servico.formaPagamento == 'Pix') relatorio.vendasPagasPix++;
-        else if (servico.formaPagamento == 'Transferência') relatorio.vendasPagasTransferencia++;
+        if (servico.pago == 'Pago' && servico.formaPagamento == 'Dinheiro') relatorio.vendasPagasDinheiro++;
+        else if (servico.pago == 'Pago' && servico.formaPagamento == 'Cartão') relatorio.vendasPagasCartao++;
+        else if (servico.pago == 'Pago' && servico.formaPagamento == 'Dinheiro e Cartão') relatorio.vendasPagasDinheiroEcartao++;
+        else if (servico.pago == 'Pago' && servico.formaPagamento == 'Pix') relatorio.vendasPagasPix++;
+        else if (servico.pago == 'Pago' && servico.formaPagamento == 'Transferência') relatorio.vendasPagasTransferencia++;
+        else if (servico.pago == 'Pago') relatorio.naoEpecificado++;
 
-        relatorio.valorAreceber += Number(servico.resta);
-        relatorio.lucroVendas += Number(servico.total);
+        relatorio.valorAreceber += Number(servico.resta.replace(',', '.'));
+        relatorio.lucroVendas += Number(servico.total.replace(',', '.'));
     }
 
     for (concerto of concertos) {
         relatorio.qtdConcertos++;
-        relatorio.lucroConcertos += Number(concerto.valor)
+        relatorio.lucroConcertos += Number(concerto.valor.replace(',', '.'))
         if (concerto.pago == 'Não Pago') relatorio.concertosNaoPagos++;
         if (concerto.pago == 'Pago') relatorio.concertosPagos++;
-
+        
+        if (concerto.pago == 'Pago') relatorio.concertosRecebido += Number(concerto.valor.replace(',', '.'));
+        else relatorio.concertosAReceber += Number(concerto.valor.replace(',', '.'));
+        
         if (concerto.tipo == 'Solda') relatorio.qtdSolda++;
         if (concerto.tipo == 'Mola') relatorio.qtdMola++;
         if (concerto.tipo == 'Parafuso') relatorio.qtdParafuso++;
@@ -112,7 +112,7 @@ exports.geraRelatorio = async (DeData, AteData) => {
 
     relatorio.lucroBruto += Number(relatorio.lucroConcertos) + Number(relatorio.lucroVendas)
     relatorio.valorRecebido = Number(relatorio.lucroVendas) - Number(relatorio.valorAreceber)
-
+    relatorio.lentesMaisVendidas = await setLentesMaisVendidas()
     return relatorio;
 
 }
@@ -334,14 +334,40 @@ setRelatorio = (servicos, lentes, concertos, exames, data) => {
 
 }
 
-const formataData = (dia, mes) => {
-    let fdia = ''
-    let fmes = ''
-    if (dia < 10) fdia = `0${dia}`
-    else fdia = `${dia}`
+const setLentesMaisVendidas = async () => {
+    const lentes = await Servico.searchLentes();
+    const lentesMaisVendidasToSort = {}
+    lentes.forEach(Keylente => {
+        if (Keylente.lente in lentesMaisVendidasToSort) {
+            if (Keylente.lente !== '') lentesMaisVendidasToSort[Keylente.lente]++;
+        } else {
+            if (Keylente.lente !== '') lentesMaisVendidasToSort[Keylente.lente] = 1
+        }
+    });
 
-    if (mes < 10) fmes = `0${mes}`
-    else fmes = `${mes}`
 
-    return `${fdia}/${fmes}`
+    let lentesMaisVendidas_lista = [];
+    for (let lente in lentesMaisVendidasToSort) {
+        lentesMaisVendidas_lista.push([lente, lentesMaisVendidasToSort[lente]]);
+    }
+
+    lentesMaisVendidas_lista.sort(function (a, b) {
+        return b[1] - a[1];
+    });
+
+    const lentesMaisVendidas = {
+        'primeiro': { lente: lentesMaisVendidas_lista[0][0], qtd: lentesMaisVendidas_lista[0][1], lucroBruto: 0 },
+        'segundo': { lente: lentesMaisVendidas_lista[1][0], qtd: lentesMaisVendidas_lista[1][1], lucroBruto: 0 },
+        'terceiro': { lente: lentesMaisVendidas_lista[2][0], qtd: lentesMaisVendidas_lista[2][1], lucroBruto: 0 },
+        'lcBruto': 0
+    }
+
+    lentes.forEach(keylente => {
+        if (keylente.lente == lentesMaisVendidas_lista[0][0]) lentesMaisVendidas.primeiro.lucroBruto += Number(keylente.valorLen.replace(',', '.'));
+        if (keylente.lente == lentesMaisVendidas_lista[1][0]) lentesMaisVendidas.segundo.lucroBruto += Number(keylente.valorLen.replace(',', '.'));
+        if (keylente.lente == lentesMaisVendidas_lista[2][0]) lentesMaisVendidas.terceiro.lucroBruto += Number(keylente.valorLen.replace(',', '.'));
+        lentesMaisVendidas.lcBruto += Number(keylente.valorLen.replace(',', '.'));
+    });
+
+    return lentesMaisVendidas
 }
