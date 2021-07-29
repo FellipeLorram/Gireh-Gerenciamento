@@ -125,8 +125,8 @@ servico.init()
 ficha.init()
 
 const dell_btn_vendas = document.querySelector(".dell_btn_vendas");
-const dell_btn_fichas = document.querySelector(".dell_btn_fichas");
-const dell_btn_concertos = document.querySelector(".dell_btn_concertos");
+const dell_btn_fichas = document.querySelectorAll(".dell_btn_fichas");
+const dell_btn_concertos = document.querySelectorAll(".dell_btn_concertos");
 
 if (dell_btn_vendas) {
     dell_btn_vendas.addEventListener("click", e => {
@@ -143,38 +143,44 @@ if (dell_btn_vendas) {
 }
 
 if (dell_btn_fichas) {
-    dell_btn_fichas.addEventListener("click", e => {
-        e.preventDefault()
+    dell_btn_fichas.forEach(dell_btn => {
+        dell_btn.addEventListener("click", e => {
+            e.preventDefault()
 
-        const hreftext = `${e.target.href}`
-        cancelwindow.open({
-            title: 'DELETAR FICHA',
-            message: 'Após a exclusão, voce perderá todos os dados dessa ficha. Você realmente deseja excluí-la?',
-            href: hreftext
-        })
+            const hreftext = `${e.target.href}`
+            cancelwindow.open({
+                title: 'DELETAR FICHA',
+                message: 'Após a exclusão, voce perderá todos os dados dessa ficha. Você realmente deseja excluí-la?',
+                href: hreftext
+            })
 
+        });
     });
 }
 
 if (dell_btn_concertos) {
-    dell_btn_concertos.addEventListener("click", e => {
-        e.preventDefault()
+    dell_btn_concertos.forEach(dell_btn => {
+        dell_btn.addEventListener("click", e => {
+            e.preventDefault()
 
-        const hreftext = `${e.target.href}`
-        cancelwindow.open({
-            title: 'DELETAR CONCERTO',
-            message: 'Após a exclusão, voce perderá todos os dados desse concerto. Você realmente deseja excluí-la?',
-            href: hreftext
-        })
+            const hreftext = `${e.target.href}`
+            cancelwindow.open({
+                title: 'DELETAR CONCERTO',
+                message: 'Após a exclusão, voce perderá todos os dados desse concerto. Você realmente deseja excluí-la?',
+                href: hreftext
+            })
+
+        });
 
     });
+
 }
 
 const tr__servico = document.querySelectorAll('.tr__servico')
 if (tr__servico) {
     tr__servico.forEach(servico => {
         servico.addEventListener('click', e => {
-            if (!e.target.classList.contains('dell_btn_fichas')) {
+            if (!e.target.classList.contains('dell_btn_fichas') && !e.target.classList.contains('dell_btn_concertos')) {
                 servico.querySelector('.link__servico').click()
                 servico.classList.remove('tr__servico')
                 servico.classList.add('clickSimulation')

@@ -51,11 +51,11 @@ exports.geraRelatorio = async () => {
         lucroVendas: 0,
 
         qtdConcertos: 0,
-        qtdSolda: 0,
-        qtdMola: 0,
-        qtdParafuso: 0,
-        qtdPlaqueta: 0,
-        qtdPassagem: 0,
+        Solda: { qtd: 0, lcBruto: 0 },
+        Mola: { qtd: 0, lcBruto: 0 },
+        Parafuso: { qtd: 0, lcBruto: 0 },
+        Plaqueta: { qtd: 0, lcBruto: 0 },
+        Passagem: { qtd: 0, lcBruto: 0 },
         concertosNaoPagos: 0,
         concertosPagos: 0,
         lucroConcertos: 0,
@@ -92,15 +92,26 @@ exports.geraRelatorio = async () => {
         relatorio.lucroConcertos += Number(concerto.valor.replace(',', '.'))
         if (concerto.pago == 'Não Pago') relatorio.concertosNaoPagos++;
         if (concerto.pago == 'Pago') relatorio.concertosPagos++;
-        
+
         if (concerto.pago == 'Pago') relatorio.concertosRecebido += Number(concerto.valor.replace(',', '.'));
-        else relatorio.concertosAReceber += Number(concerto.valor.replace(',', '.'));
-        
-        if (concerto.tipo == 'Solda') relatorio.qtdSolda++;
-        if (concerto.tipo == 'Mola') relatorio.qtdMola++;
-        if (concerto.tipo == 'Parafuso') relatorio.qtdParafuso++;
-        if (concerto.tipo == 'Plaqueta') relatorio.qtdPlaqueta++;
-        if (concerto.tipo == 'Passagem') relatorio.qtdPassagem++;
+        else if (concerto.pago == 'Não Pago') relatorio.concertosAReceber += Number(concerto.valor.replace(',', '.'));
+
+        if (concerto.tipo == 'Solda') {
+            if (concerto.pago == 'Pago') relatorio.Solda.lcBruto += Number(concerto.valor.replace(',', '.'));
+            relatorio.Solda.qtd++;
+            console.log(relatorio.Solda.lcBruto)
+        }
+
+
+        if (concerto.tipo == 'Mola') {
+            if (concerto.pago == 'Pago') relatorio.Mola.lcBruto += Number(concerto.valor.replace(',', '.')); 
+            relatorio.Mola.qtd++;
+        }
+
+        if (concerto.tipo == 'Parafuso') relatorio.Parafuso.qtd++;
+        if (concerto.tipo == 'Plaqueta') relatorio.Plaqueta.qtd++;
+        if (concerto.tipo == 'Passagem') relatorio.Passagem.qtd++;
+
 
     }
 

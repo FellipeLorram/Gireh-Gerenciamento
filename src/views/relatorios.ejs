@@ -372,7 +372,19 @@
                                     <div class="tabs__content_inside">
                                         <div class="accordion">
                                             <button type="button" class="accordion__button_inside">
-                                                Soldas <span class="accordion_button_text"> <%= relatorio.qtdSolda %> </span></button>
+                                                Soldas <span class="accordion_button_text"> <%= relatorio.Solda.qtd %> </span></button>
+                                            <div class="accordion_content_inside">
+                                                <div class="relatorio_geral_inside_inside">
+                                                    <div class="texto_geral">Lucro bruto</div>
+                                                    <div class="numero_geral"> <em> <%= relatorio.Solda.lcBruto.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}); %> </em></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="accordion">
+                                            <button type="button" class="accordion__button_inside">
+                                                Molas <span class="accordion_button_text"><%= relatorio.Mola.qtd %></span></button>
                                             <div class="accordion_content_inside">
                                                 <div class="relatorio_geral_inside_inside">
                                                     <div class="texto_geral">Lucro bruto</div>
@@ -384,7 +396,7 @@
 
                                         <div class="accordion">
                                             <button type="button" class="accordion__button_inside">
-                                                Molas <span class="accordion_button_text"> 55 </span></button>
+                                                Parafusos <span class="accordion_button_text"><%= relatorio.Parafuso.qtd %> </span></button>
                                             <div class="accordion_content_inside">
                                                 <div class="relatorio_geral_inside_inside">
                                                     <div class="texto_geral">Lucro bruto</div>
@@ -396,7 +408,7 @@
 
                                         <div class="accordion">
                                             <button type="button" class="accordion__button_inside">
-                                                Parafusos <span class="accordion_button_text"> 55 </span></button>
+                                                Passagens <span class="accordion_button_text"> <%= relatorio.Passagem.qtd %> </span></button>
                                             <div class="accordion_content_inside">
                                                 <div class="relatorio_geral_inside_inside">
                                                     <div class="texto_geral">Lucro bruto</div>
@@ -408,19 +420,7 @@
 
                                         <div class="accordion">
                                             <button type="button" class="accordion__button_inside">
-                                                Passagens <span class="accordion_button_text"> 55 </span></button>
-                                            <div class="accordion_content_inside">
-                                                <div class="relatorio_geral_inside_inside">
-                                                    <div class="texto_geral">Lucro bruto</div>
-                                                    <div class="numero_geral"> <em> R$14 </em></div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="accordion">
-                                            <button type="button" class="accordion__button_inside">
-                                                Plaquetas <span class="accordion_button_text"> 55 </span></button>
+                                                Plaquetas <span class="accordion_button_text"> <%= relatorio.Plaqueta.qtd %> </span></button>
                                             <div class="accordion_content_inside">
                                                 <div class="relatorio_geral_inside_inside">
                                                     <div class="texto_geral">Lucro bruto</div>
