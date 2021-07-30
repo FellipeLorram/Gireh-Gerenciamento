@@ -219,3 +219,15 @@ if (accordions_buttons) {
         });
     });
 }
+
+const dataInput = document.querySelectorAll('.data_container input')
+if (dataInput) {
+
+
+    document.addEventListener('click', e => {
+        dataInput.forEach(input => {
+            if (e.target == input) e.target.classList.toggle('input_scale')
+            else input.classList.remove('input_scale')
+        });
+    });
+}

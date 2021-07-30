@@ -74,20 +74,17 @@
             <div class="col-lg-2"></div>
 
             <div class="col-lg-8 my-3">
-                <h1 class="text-center my-3">Relatório Geral</h1>
-                <div class="line"></div>
-                <form class="my-5" action="/relatorios/index/gera-relatorio" method="GET">
-
-                    <div class="container__relatorio_de_ate">
-                        <div class="data_container">
-                            <label for="de">De:</label>
-                            <input type="date" name="de" class="data" required>
-                        </div>
-                        <div class="data_container"> 
-                            <label for="de">Até:</label>
-                            <input type="date" name="ate" class="data" required>
-                        </div>
+                <h1 class="text-center my-3">Relatório entre</h1>
+                <div class="container__relatorio_de_ate">
+                    <div class="data_container">
+                        <div class="data"><%= relatorio.de %></div>
                     </div>
+                    <div class="data_container">
+                        <div class="data"><%= relatorio.ate %></div>
+                    </div>
+                </div>
+                <div class="line mb-2"></div>
+                
 
                     <div class="accordion">
                         <button type="button" class="accordion__button">Geral <span class="accordion_button_number">
@@ -453,17 +450,35 @@
 
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary my-3">Gerar relatório</button>
-                </form>
+                    <form action="/relatorios/index/imprimir-relatorio" method="POST">
 
+                        <input type="date" value="<%= relatorio.de %>" name="de" class="form-control" hidden >
+                        <input type="date" value="<%= relatorio.ate %>" name="ate" class="form-control" hidden>
+                        <button type="submit" class="btn btn-primary my-3">Gerar PDF</button>
+                    </form>
+                    <div class="line mb-2"></div>
+
+                    <form class="my-3" action="/relatorios/index/gera-relatorio" method="GET">
+                        <h2 class="text-center  mb-3">Gerar novo relatório</h2>
+                        <div class="container__relatorio_de_ate">
+                            <div class="data_container ">
+                                <label for="de">De:</label>
+                                <input type="date" name="de" class="data" required>
+                            </div>
+                            <div class="data_container">
+                                <label for="de">Até:</label>
+                                <input type="date" name="ate" class="data" required>
+                            </div>
+                        </div>
+
+                    <button type="submit" class="btn btn-primary my-3">Gerar novo relatório</button>
+                
+               
+            </form>
             </div>
 
 
         </div>
-
-
-
-
 
 
         <div class="col-lg-2"></div>

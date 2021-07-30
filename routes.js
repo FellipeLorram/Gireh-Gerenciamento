@@ -47,10 +47,11 @@ route.get('/fichas/fichas', loginRequired, fichaController.indexFichas);
 route.get('/fichas/fichas/pesquisa', loginRequired, fichaController.pesquisaFichas);
 
 route.get('/relatorios/index', loginRequired, adminRequired, ferramentasController.relatorioIndex);
+route.get('/relatorios/index/gera-relatorio', loginRequired, adminRequired, ferramentasController.geraRelatorio);
 route.get('/ferramentas/index', loginRequired, ferramentasController.ferramentaIndex);
 route.get('/ferramentas/lista-lentes', loginRequired, ferramentasController.listaLentesIndex);
 route.post('/ferramentas/lista-lentes/gera-lista', loginRequired, ferramentasController.geraLista)
-route.post('/relatorios/index/gera-relatorio', loginRequired, ferramentasController.geraRelatorio)
+route.post('/relatorios/index/imprimir-relatorio', loginRequired, ferramentasController.imprimiRelatorio)
 
 
 

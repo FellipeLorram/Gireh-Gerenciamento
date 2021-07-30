@@ -32,7 +32,7 @@ const FichaSchema = new mongoose.Schema({
     rxCilOd: { type: String, required: false, default: '' },
     rxEixoOd: { type: String, required: false, default: '' },
     rxAddOd: { type: String, required: false, default: '' },
-   
+
     rxEsfOe: { type: String, required: false, default: '' },
     rxCilOe: { type: String, required: false, default: '' },
     rxEixoOe: { type: String, required: false, default: '' },
@@ -56,9 +56,10 @@ Ficha.searchId = async function (id) {
     return ficha;
 }
 
-Ficha.searchFichas = async function () {
-    const ficha = await FichaModel.find().sort({ CriadoEm: -1 });
-    return ficha;
+Ficha.searchFichas = async function (DeData, AteData) {
+    if (!DeData || !AteData) return await FichaModel.find().sort({ CriadoEm: -1 });
+    if (DeData == AteData) return await FichaModel.find({ CriadoEm: new Date(DeData) });
+    return await FichaModel.find({ CriadoEm: { "$gte": new Date(DeData), "$lte": new Date(AteData) } });
 }
 
 Ficha.searchNameFichas = async function (Nome) {
@@ -146,11 +147,5 @@ Ficha.prototype.edit = async function (id) {
 
     this.ficha = await FichaModel.findByIdAndUpdate(id, this.body, { new: true });
 }
-
-Ficha.relatorio = async (DeData, AteData) => {
-    if(DeData == AteData)  return await FichaModel.find({CriadoEm: new Date(DeData)});
-    return await FichaModel.find({CriadoEm: {"$gte": new Date(DeData) , "$lte": new Date(AteData)}});
-}
-
 
 module.exports = Ficha;

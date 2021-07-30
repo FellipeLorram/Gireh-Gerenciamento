@@ -871,7 +871,6 @@ label {
   color: #000000;
 }
 
-
 .tabs__label-inside {
   padding: 7px 13px;
 }
@@ -1012,7 +1011,9 @@ label {
   max-height: 0px;
   padding: 0px;
   font-family: 'Poppins', sans-serif;
-  transition: max-height 0.3s, padding 0.2s ease-in-out;
+  transition-delay: 1s, 1s;
+  transition-property: border-top-left-radius, border-top-right-radius;
+  transition: max-height 0.3s, padding 0.2s ease-in-out, border-top-left-radius 0.2s, border-top-right-radius 0.2s;
   background: #c7c7c7;
   margin-bottom: 10px;
   border-radius: 6px;
@@ -1023,4 +1024,49 @@ label {
   padding: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.container__relatorio_de_ate {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  border-radius: 6px;
+  margin-right: 5px;
+  width: 100%;
+  padding: 10px;
+  background-color: #b4b4b4;
+  color: #000000;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+}
+
+.data_especifica{
+  height: 20px;
+}
+
+.data_container{
+  margin-right: 5px;
+}
+
+.data_container:last-of-type{
+  margin-right: 0;
+}
+
+.data_container input{
+  outline: none;
+  border: none;
+  overflow: hidden;
+  transition: transform 0.1s;
+}
+
+.input_scale{
+  transform: scale(1.012);
 }

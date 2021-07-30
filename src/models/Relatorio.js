@@ -9,10 +9,10 @@ exports.relatorio = async function (DeData, AteData) {
         AteData = `${Adata[0]}-${Adata[1]}-${Number(Adata[2]) + 1}`
         let data = ''
 
-        const servicos = await Servico.relatorio(DeData, AteData);
+        const servicos = await Servico.searchServicos(DeData, AteData);
         const lentes = await Servico.searchLentes(DeData, AteData);
-        const concertos = await Concerto.relatorio(DeData, AteData)
-        const exames = await Ficha.relatorio(DeData, AteData);
+        const concertos = await Concerto.searchConcertos(DeData, AteData)
+        const exames = await Ficha.searchFichas(DeData, AteData);
 
         if (Ddata[2] != Adata[2]) data = `Relatório referente ao intervalo entre\n ${Ddata[2]}/${Ddata[1]}/${Ddata[0]} e ${Adata[2]}/${Adata[1]}/${Adata[0]}`
         else data = `Relatório referente a ${Ddata[2]}/${Ddata[1]}/${Ddata[0]}`
@@ -26,10 +26,11 @@ exports.relatorio = async function (DeData, AteData) {
 
 }
 
-exports.geraRelatorio = async () => {
-    const servicos = await Servico.searchServicos();
-    const concertos = await Concerto.searchConcertos()
-    const exames = await Ficha.searchFichas();
+exports.geraRelatorio = async (DeData, AteData) => {
+    const servicos = await Servico.searchServicos(DeData, AteData);
+    const concertos = await Concerto.searchConcertos(DeData, AteData)
+    const exames = await Ficha.searchFichas(DeData, AteData);
+
 
     const relatorio = {
         qtdVenda: 0,
@@ -99,18 +100,28 @@ exports.geraRelatorio = async () => {
         if (concerto.tipo == 'Solda') {
             if (concerto.pago == 'Pago') relatorio.Solda.lcBruto += Number(concerto.valor.replace(',', '.'));
             relatorio.Solda.qtd++;
-            console.log(relatorio.Solda.lcBruto)
         }
 
 
         if (concerto.tipo == 'Mola') {
-            if (concerto.pago == 'Pago') relatorio.Mola.lcBruto += Number(concerto.valor.replace(',', '.')); 
+            if (concerto.pago == 'Pago') relatorio.Mola.lcBruto += Number(concerto.valor.replace(',', '.'));
             relatorio.Mola.qtd++;
         }
 
-        if (concerto.tipo == 'Parafuso') relatorio.Parafuso.qtd++;
-        if (concerto.tipo == 'Plaqueta') relatorio.Plaqueta.qtd++;
-        if (concerto.tipo == 'Passagem') relatorio.Passagem.qtd++;
+        if (concerto.tipo == 'Parafuso') {
+            if (concerto.pago == 'Pago') relatorio.Parafuso.lcBruto += Number(concerto.valor.replace(',', '.'));
+            relatorio.Parafuso.qtd++
+        };
+
+        if (concerto.tipo == 'Plaqueta') {
+            if (concerto.pago == 'Pago') relatorio.Plaqueta.lcBruto += Number(concerto.valor.replace(',', '.'));
+            relatorio.Plaqueta.qtd++;
+        }
+
+        if (concerto.tipo == 'Passagem') {
+            if (concerto.pago == 'Pago') relatorio.Passagem.lcBruto += Number(concerto.valor.replace(',', '.'));
+            relatorio.Passagem.qtd++;
+        }
 
 
     }
@@ -123,7 +134,11 @@ exports.geraRelatorio = async () => {
 
     relatorio.lucroBruto += Number(relatorio.lucroConcertos) + Number(relatorio.lucroVendas)
     relatorio.valorRecebido = Number(relatorio.lucroVendas) - Number(relatorio.valorAreceber)
-    relatorio.lentesMaisVendidas = await setLentesMaisVendidas()
+
+    relatorio.lentesMaisVendidas = await setLentesMaisVendidas(DeData, AteData)
+    relatorio.armacaoMaisVendidas = await setArmacaoMaisVendidas(DeData, AteData)
+
+
     return relatorio;
 
 }
@@ -381,4 +396,41 @@ const setLentesMaisVendidas = async () => {
     });
 
     return lentesMaisVendidas
+}
+
+const setArmacaoMaisVendidas = async () => {
+    const armacoes = await Servico.searchArmacoes();
+    const armacoesMaisVendidasToSort = {}
+    armacoes.forEach(KeyArmacao => {
+        if (KeyArmacao.armacao in armacoesMaisVendidasToSort) {
+            if (KeyArmacao.armacao !== '' && KeyArmacao.armacao !== 'Própia') armacoesMaisVendidasToSort[KeyArmacao.armacao]++;
+        } else {
+            if (KeyArmacao.armacao !== '' && KeyArmacao.armacao !== 'Própia') armacoesMaisVendidasToSort[KeyArmacao.armacao] = 1
+        }
+    });
+
+    let armacoesMaisVendidas_lista = [];
+    for (let armacao in armacoesMaisVendidasToSort) {
+        armacoesMaisVendidas_lista.push([armacao, armacoesMaisVendidasToSort[armacao]]);
+    }
+
+    armacoesMaisVendidas_lista.sort(function (a, b) {
+        return b[1] - a[1];
+    });
+
+    const armacaoMaisVendidas = {
+        'primeiro': { armacao: armacoesMaisVendidas_lista[0][0], qtd: armacoesMaisVendidas_lista[0][1], lucroBruto: 0 },
+        'segundo': { armacao: armacoesMaisVendidas_lista[1][0], qtd: armacoesMaisVendidas_lista[1][1], lucroBruto: 0 },
+        'terceiro': { armacao: armacoesMaisVendidas_lista[2][0], qtd: armacoesMaisVendidas_lista[2][1], lucroBruto: 0 },
+        'lcBruto': 0
+    }
+
+    armacoes.forEach(keyArmacao => {
+        if (keyArmacao.armacao == armacoesMaisVendidas_lista[0][0]) armacaoMaisVendidas.primeiro.lucroBruto += Number(keyArmacao.valorArm.replace(',', '.'));
+        if (keyArmacao.armacao == armacoesMaisVendidas_lista[1][0]) armacaoMaisVendidas.segundo.lucroBruto += Number(keyArmacao.valorArm.replace(',', '.'));
+        if (keyArmacao.armacao == armacoesMaisVendidas_lista[2][0]) armacaoMaisVendidas.terceiro.lucroBruto += Number(keyArmacao.valorArm.replace(',', '.'));
+        armacaoMaisVendidas.lcBruto += Number(keyArmacao.valorArm.replace(',', '.'));
+    });
+
+    return armacaoMaisVendidas
 }

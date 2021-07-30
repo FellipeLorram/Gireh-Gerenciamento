@@ -27,9 +27,10 @@ Concerto.searchId = async function (id) {
     return concerto;
 }
 
-Concerto.searchConcertos = async function () {
-    const concerto = await ConcertoModel.find().sort({ CriadoEm: -1 });
-    return concerto;
+Concerto.searchConcertos = async function (DeData, AteData) {
+    if (!DeData || !AteData) return await ConcertoModel.find().sort({ CriadoEm: -1 });
+    if(DeData == AteData)  return await ConcertoModel.find({CriadoEm: new Date(DeData)});
+    return await ConcertoModel.find({CriadoEm: {"$gte": new Date(DeData) , "$lte": new Date(AteData)}});
 }
 
 Concerto.searchNameConcertos = async function (Nome) {
@@ -86,11 +87,6 @@ Concerto.prototype.edit = async function (id) {
     if (this.errors.length > 0) return;
 
     this.concerto = await ConcertoModel.findByIdAndUpdate(id, this.body, { new: true });
-}
-
-Concerto.relatorio = async function(DeData, AteData) {
-    if(DeData == AteData)  return await ConcertoModel.find({CriadoEm: new Date(DeData)});
-    return await ConcertoModel.find({CriadoEm: {"$gte": new Date(DeData) , "$lte": new Date(AteData)}});
 }
 
 

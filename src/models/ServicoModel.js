@@ -58,20 +58,22 @@ Servico.searchId = async function (id) {
     return servico;
 }
 
-Servico.searchServicos = async function () {
-    const servico = await ServicoModel.find().sort({ CriadoEm: -1 });
-    return servico;
-}
-
-Servico.relatorio = async function (DeData, AteData) {
+Servico.searchServicos = async function (DeData, AteData) {
+    if (!DeData || !AteData) return await ServicoModel.find().sort({ CriadoEm: -1 });
     if (DeData == AteData) return await ServicoModel.find({ CriadoEm: new Date(DeData) });
     return await ServicoModel.find({ CriadoEm: { "$gte": new Date(DeData), "$lte": new Date(AteData) } });
 }
 
 Servico.searchLentes = async function (DeData, AteData) {
     if (!DeData || !AteData) return await ServicoModel.find({}, { lente: 1, valorLen: 1, _id: 0 }).sort({ CriadoEm: -1 });
-    if (DeData == AteData) return await ServicoModel.find({ CriadoEm: new Date(DeData) }, { lente: 1, esfOd: 1, esfOe: 1, cilOd: 1, cilOe: 1 });
-    return await ServicoModel.find({ CriadoEm: { "$gte": new Date(DeData), "$lte": new Date(AteData) } }, { lente: 1, esfOd: 1, esfOe: 1, cilOd: 1, cilOe: 1 });
+    if (DeData == AteData) return await ServicoModel.find({ CriadoEm: new Date(DeData) }, { lente: 1, esfOd: 1, esfOe: 1, cilOd: 1, cilOe: 1,  _id: 0 });
+    return await ServicoModel.find({ CriadoEm: { "$gte": new Date(DeData), "$lte": new Date(AteData) } }, { lente: 1, esfOd: 1, esfOe: 1, cilOd: 1, cilOe: 1,  _id: 0 });
+}
+
+Servico.searchArmacoes = async function (DeData, AteData) {
+    if (!DeData || !AteData) return await ServicoModel.find({}, { armacao: 1, valorArm: 1, _id: 0 }).sort({ CriadoEm: -1 });
+    if (DeData == AteData) return await ServicoModel.find({ CriadoEm: new Date(DeData) }, { armacao: 1, valorArm: 1, _id: 0 });
+    return await ServicoModel.find({ CriadoEm: { "$gte": new Date(DeData), "$lte": new Date(AteData) } }, { armacao: 1, valorArm: 1, _id: 0 });
 }
 
 Servico.searchNameServicos = async function (Nome) {

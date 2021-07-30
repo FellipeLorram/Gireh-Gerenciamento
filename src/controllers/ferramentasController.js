@@ -34,6 +34,13 @@ exports.relatorioIndex = async (req, res) => {
 }
 
 exports.geraRelatorio = async (req, res) => {
+  var relatorio = await Relatorio.geraRelatorio(req.query.de, req.query.ate);
+  relatorio.de = req.query.de
+  relatorio.ate = req.query.ate
+  res.render('relatoriosEspecifico', { relatorio })
+}
+
+exports.imprimiRelatorio = async (req, res) => {
   var relatorio = await Relatorio.relatorio(req.body.de, req.body.ate)
 
   const pdfDoc = pdfMake.createPdf(relatorio);
