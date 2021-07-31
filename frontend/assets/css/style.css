@@ -930,7 +930,7 @@ label {
   font-weight: bold;
   font-size: 0.9em;
   padding: 0 15px;
-  transition: background 0.2s;
+  transition: background 0.2s, border-radius 0.2s 0.3s;
 }
 
 .accordion__button_inside {
@@ -947,7 +947,7 @@ label {
   font-weight: bold;
   font-size: 0.9em;
   padding: 0 15px;
-  transition: background 0.2s;
+  transition: background 0.2s, border-radius 0.2s 0.3s;
 }
 
 .accordion_button_number {
@@ -977,6 +977,7 @@ label {
 }
 
 .accordion__button--active {
+  transition: border-radius 0;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -1003,7 +1004,10 @@ label {
   transition: max-height 0.3s, padding 0.2s ease-in-out;
   background: #c4c4c4;
   margin-bottom: 10px;
-  border-radius: 6px;
+  border-bottom-left-radius: 6;
+  border-bottom-right-radius: 6;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .accordion_content {
@@ -1011,12 +1015,13 @@ label {
   max-height: 0px;
   padding: 0px;
   font-family: 'Poppins', sans-serif;
-  transition-delay: 1s, 1s;
-  transition-property: border-top-left-radius, border-top-right-radius;
-  transition: max-height 0.3s, padding 0.2s ease-in-out, border-top-left-radius 0.2s, border-top-right-radius 0.2s;
+  transition: max-height 0.3s, padding 0.2s ease-in-out;
   background: #c7c7c7;
   margin-bottom: 10px;
-  border-radius: 6px;
+  border-bottom-left-radius: 6;
+  border-bottom-right-radius: 6;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .accordion_content_active {

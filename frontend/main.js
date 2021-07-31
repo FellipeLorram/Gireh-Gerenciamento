@@ -231,3 +231,22 @@ if (dataInput) {
         });
     });
 }
+
+var speedDialContainer = document.querySelector(".speed-dial");
+if (speedDialContainer) {
+    var primaryButton = speedDialContainer.querySelector("#btnPrimary");
+
+    primaryButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        speedDialContainer.classList.toggle('speed-dial--active')
+        /*var classList = "speed-dial";
+        var primaryButtonClicked = e.target === primaryButton || primaryButton.contains(e.target);
+        var speedDialIsActive = speedDialContainer.getAttribute("class").indexOf("speed-dial--active") !== -1;
+
+        if (primaryButtonClicked && !speedDialIsActive) {
+            classList += " speed-dial--active";
+        }
+
+        speedDialContainer.setAttribute("class", classList);*/
+    });
+}
