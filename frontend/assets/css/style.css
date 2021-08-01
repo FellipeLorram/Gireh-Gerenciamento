@@ -1080,7 +1080,7 @@ label {
 .input_scale {
   transform: scale(1.012);
 }
-@media (max-width:500px) {
+@media (max-width:420px) {
   .container__relatorio_de_ate {
     grid-template-columns: 1fr;
   }
