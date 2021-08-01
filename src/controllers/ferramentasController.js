@@ -35,8 +35,8 @@ exports.relatorioIndex = async (req, res) => {
 
 exports.geraRelatorio = async (req, res) => {
   var relatorio = await Relatorio.geraRelatorio(req.query.de, req.query.ate);
-  relatorio.de = req.query.de
-  relatorio.ate = req.query.ate
+  relatorio.de = formataData(req.query.de)
+  relatorio.ate = formataData(req.query.ate)
   res.render('relatoriosEspecifico', { relatorio })
 }
 
@@ -54,4 +54,9 @@ exports.imprimiRelatorio = async (req, res) => {
     const download = Buffer.from(data.toString('utf-8'), 'base64');
     res.end(download);
   });
+}
+
+const formataData = (data) => {
+  formData = data.split('-')
+  return `${formData[2]}/${formData[1]}/${formData[0]}`
 }

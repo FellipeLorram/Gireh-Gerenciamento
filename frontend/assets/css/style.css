@@ -335,6 +335,10 @@ nav .navbar .links li:hover .htmlCss-sub-menu, nav .navbar .links li:hover .js-s
   nav .navbar .nav-links {
     max-width: 100%;
   }
+  .container__relatorio_de_ate {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }
 
 .NomeIndex, .posicao {
@@ -1075,4 +1079,9 @@ label {
 
 .input_scale {
   transform: scale(1.012);
+}
+@media (max-width:500px) {
+  .container__relatorio_de_ate {
+    grid-template-columns: 1fr;
+  }
 }

@@ -360,8 +360,8 @@ setRelatorio = (servicos, lentes, concertos, exames, data) => {
 
 }
 
-const setLentesMaisVendidas = async () => {
-    const lentes = await Servico.searchLentes();
+const setLentesMaisVendidas = async (DeData, AteData) => {
+    const lentes = await Servico.searchLentes(DeData, AteData);
     const lentesMaisVendidasToSort = {}
     lentes.forEach(Keylente => {
         if (Keylente.lente in lentesMaisVendidasToSort) {
@@ -392,14 +392,14 @@ const setLentesMaisVendidas = async () => {
         if (keylente.lente == lentesMaisVendidas_lista[0][0]) lentesMaisVendidas.primeiro.lucroBruto += Number(keylente.valorLen.replace(',', '.'));
         if (keylente.lente == lentesMaisVendidas_lista[1][0]) lentesMaisVendidas.segundo.lucroBruto += Number(keylente.valorLen.replace(',', '.'));
         if (keylente.lente == lentesMaisVendidas_lista[2][0]) lentesMaisVendidas.terceiro.lucroBruto += Number(keylente.valorLen.replace(',', '.'));
-        lentesMaisVendidas.lcBruto += Number(keylente.valorLen.replace(',', '.'));
+        //lentesMaisVendidas.lcBruto += Number(keylente.valorLen.replace(',', '.'));
     });
 
     return lentesMaisVendidas
 }
 
-const setArmacaoMaisVendidas = async () => {
-    const armacoes = await Servico.searchArmacoes();
+const setArmacaoMaisVendidas = async (DeData, AteData) => {
+    const armacoes = await Servico.searchArmacoes(DeData, AteData);
     const armacoesMaisVendidasToSort = {}
     armacoes.forEach(KeyArmacao => {
         if (KeyArmacao.armacao in armacoesMaisVendidasToSort) {

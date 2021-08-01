@@ -77,10 +77,10 @@
                 <h1 class="text-center my-3">Relatório entre</h1>
                 <div class="container__relatorio_de_ate">
                     <div class="data_container">
-                        <div class="data"><%= relatorio.de %></div>
+                        <div id="newRelatory" class="data"><%= relatorio.de %></div>
                     </div>
                     <div class="data_container">
-                        <div class="data"><%= relatorio.ate %></div>
+                        <div id="newRelatory" class="data"><%= relatorio.ate %></div>
                     </div>
                 </div>
                 <div class="line mb-2"></div>
@@ -463,7 +463,7 @@
                         <div class="container__relatorio_de_ate">
                             <div class="data_container ">
                                 <label for="de">De:</label>
-                                <input type="date" name="de" class="data" required>
+                                <input id="focusTo" type="date" name="de" class="data" required>
                             </div>
                             <div class="data_container">
                                 <label for="de">Até:</label>

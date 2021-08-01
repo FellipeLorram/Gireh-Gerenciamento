@@ -232,23 +232,9 @@ if (dataInput) {
     });
 }
 
-var speedDialContainer = document.querySelector(".speed-dial");
-if (speedDialContainer) {
-    var primaryButton = speedDialContainer.querySelector("#btnPrimary");
-    var options = speedDialContainer.querySelector(".speed-dial__options");
-
-    primaryButton.addEventListener("click", function (e) {
-        e.preventDefault();
-        options.classList.toggle('speed-dial__options_active')
-        speedDialContainer.classList.toggle('speed-dial--active')
-        /*var classList = "speed-dial";
-        var primaryButtonClicked = e.target === primaryButton || primaryButton.contains(e.target);
-        var speedDialIsActive = speedDialContainer.getAttribute("class").indexOf("speed-dial--active") !== -1;
-
-        if (primaryButtonClicked && !speedDialIsActive) {
-            classList += " speed-dial--active";
-        }
-
-        speedDialContainer.setAttribute("class", classList);*/
+const nRelatorio = document.querySelectorAll("#newRelatory")
+if(nRelatorio) nRelatorio.forEach(r => {
+    r.addEventListener('click', ()=>{
+        document.querySelector("#focusTo").focus()
     });
-}
+})
