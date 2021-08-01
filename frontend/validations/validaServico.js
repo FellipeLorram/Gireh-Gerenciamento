@@ -24,12 +24,28 @@ export default class Servico {
         const cilOeInput = el.querySelector('input[name="cilOe"]');
         const eixoOdInput = el.querySelector('input[name="eixoOd"]');
         const eixoOeInput = el.querySelector('input[name="eixoOe"]');
+        const armacaoInput = el.querySelector('select[name="armacao"]');
+        const valorArmacaoInput = el.querySelector('input[name="valorArm"]');
+        const lenteInput = el.querySelector('select[name="lente"]');
+        const valorLenteInput = el.querySelector('input[name="valorLen"]');
 
         let valido = false;
 
         if (!nomeInput.value) {
             this.criaErro(nomeInput, 'Qual o nome do cliente?');
             valido = true;
+        }
+        
+        if (armacaoInput.value && !valorArmacaoInput.value) {
+            this.criaErro(valorArmacaoInput, 'Qual o preço?');
+            valido = true;
+            valorArmacaoInput.focus()
+        }
+
+        if (lenteInput.value && !valorLenteInput.value) {
+            this.criaErro(valorLenteInput, 'Qual o preço?');
+            valido = true;
+            valorLenteInput.focus();
         }
 
         if (esfOdInput.value) if (esfOdInput.value[0] !== '+' && esfOdInput.value[0] !== '-') {
@@ -44,13 +60,13 @@ export default class Servico {
             esfOeInput.focus();
         }
 
-        if(!cilOdInput.value && eixoOdInput.value){
+        if (!cilOdInput.value && eixoOdInput.value) {
             this.criaErro(cilOdInput, 'Qual grau?');
             valido = true;
             cilOdInput.focus()
         }
 
-        if(!cilOeInput.value && eixoOeInput.value){
+        if (!cilOeInput.value && eixoOeInput.value) {
             this.criaErro(cilOeInput, 'Qual grau?');
             valido = true;
             cilOeInput.focus()

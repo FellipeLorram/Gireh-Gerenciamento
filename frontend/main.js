@@ -69,6 +69,7 @@ jsArrow1.onclick = function () {
 /// Change eventos ///
 const descontoInput = document.querySelector('input[name="desconto"]');
 const totalInput = document.querySelector('input[name="total"]');
+const armacaoInput = document.querySelector('select[name="armacao"]');
 const valorArmInput = document.querySelector('input[name="valorArm"]');
 const valorLenInput = document.querySelector('input[name="valorLen"]');
 const valorLenContatoInput = document.querySelector('input[name="valorLenContato"]');
@@ -79,6 +80,7 @@ const valorCarInput = document.querySelector('input[name="valorCar"]')
 
 if (totalInput) {
 
+
     totalInput.addEventListener('click', () => {
         if (valorArmInput.value || valorLenInput.value || valorLenContatoInput.value) {
             const desconto = (Number(valorArmInput.value) + Number(valorLenInput.value) + Number(valorLenContatoInput.value)) / 100 * Number(descontoInput.value)
@@ -88,6 +90,8 @@ if (totalInput) {
 
 
     document.addEventListener('change', () => {
+        if(armacaoInput.value == 'Própia') valorArmInput.value = 0.00
+
         if (totalInput.value) {
             if (valorDinInput.value || valorCarInput.value) {
                 restaInput.value = Number(totalInput.value) - (Number(valorDinInput.value) + Number(valorCarInput.value))

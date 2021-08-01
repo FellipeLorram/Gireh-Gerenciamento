@@ -381,19 +381,29 @@ const setLentesMaisVendidas = async (DeData, AteData) => {
         return b[1] - a[1];
     });
 
-    const lentesMaisVendidas = {
-        'primeiro': { lente: lentesMaisVendidas_lista[0][0], qtd: lentesMaisVendidas_lista[0][1], lucroBruto: 0 },
-        'segundo': { lente: lentesMaisVendidas_lista[1][0], qtd: lentesMaisVendidas_lista[1][1], lucroBruto: 0 },
-        'terceiro': { lente: lentesMaisVendidas_lista[2][0], qtd: lentesMaisVendidas_lista[2][1], lucroBruto: 0 },
-        'lcBruto': 0
-    }
+    if (lentesMaisVendidas_lista.length > 0) {
+        const lentesMaisVendidas = {
+            'primeiro': { lente: lentesMaisVendidas_lista[0][0], qtd: lentesMaisVendidas_lista[0][1], lucroBruto: 0 },
+            'segundo': { lente: lentesMaisVendidas_lista[1][0], qtd: lentesMaisVendidas_lista[1][1], lucroBruto: 0 },
+            'terceiro': { lente: lentesMaisVendidas_lista[2][0], qtd: lentesMaisVendidas_lista[2][1], lucroBruto: 0 },
+            'lcBruto': 0
+        }
 
-    lentes.forEach(keylente => {
-        if (keylente.lente == lentesMaisVendidas_lista[0][0]) lentesMaisVendidas.primeiro.lucroBruto += Number(keylente.valorLen.replace(',', '.'));
-        if (keylente.lente == lentesMaisVendidas_lista[1][0]) lentesMaisVendidas.segundo.lucroBruto += Number(keylente.valorLen.replace(',', '.'));
-        if (keylente.lente == lentesMaisVendidas_lista[2][0]) lentesMaisVendidas.terceiro.lucroBruto += Number(keylente.valorLen.replace(',', '.'));
-        //lentesMaisVendidas.lcBruto += Number(keylente.valorLen.replace(',', '.'));
-    });
+        lentes.forEach(keylente => {
+            if (keylente.lente == lentesMaisVendidas_lista[0][0]) lentesMaisVendidas.primeiro.lucroBruto += Number(keylente.valorLen.replace(',', '.'));
+            if (keylente.lente == lentesMaisVendidas_lista[1][0]) lentesMaisVendidas.segundo.lucroBruto += Number(keylente.valorLen.replace(',', '.'));
+            if (keylente.lente == lentesMaisVendidas_lista[2][0]) lentesMaisVendidas.terceiro.lucroBruto += Number(keylente.valorLen.replace(',', '.'));
+            lentesMaisVendidas.lcBruto += Number(keylente.valorLen.replace(',', '.'));
+        });
+
+    } else {
+        return {
+            'primeiro': { lente: "N/A", qtd: 0, lucroBruto: 0 },
+            'segundo': { lente: "N/A", qtd: 0, lucroBruto: 0 },
+            'terceiro': { lente: "N/A", qtd: 0, lucroBruto: 0 },
+            'lcBruto': 0
+        }
+    }
 
     return lentesMaisVendidas
 }
@@ -418,19 +428,30 @@ const setArmacaoMaisVendidas = async (DeData, AteData) => {
         return b[1] - a[1];
     });
 
-    const armacaoMaisVendidas = {
-        'primeiro': { armacao: armacoesMaisVendidas_lista[0][0], qtd: armacoesMaisVendidas_lista[0][1], lucroBruto: 0 },
-        'segundo': { armacao: armacoesMaisVendidas_lista[1][0], qtd: armacoesMaisVendidas_lista[1][1], lucroBruto: 0 },
-        'terceiro': { armacao: armacoesMaisVendidas_lista[2][0], qtd: armacoesMaisVendidas_lista[2][1], lucroBruto: 0 },
-        'lcBruto': 0
-    }
+    if (armacoesMaisVendidas_lista.length > 0) {
+        if(!armacoesMaisVendidas_lista[1]) armacoesMaisVendidas_lista[1] = ["N/A", 0]
+        if(!armacoesMaisVendidas_lista[2]) armacoesMaisVendidas_lista[2] = ["N/A", 0]
+        const armacaoMaisVendidas = {
+            'primeiro': { armacao: armacoesMaisVendidas_lista[0][0], qtd: armacoesMaisVendidas_lista[0][1], lucroBruto: 0 },
+            'segundo': { armacao: armacoesMaisVendidas_lista[1][0], qtd: armacoesMaisVendidas_lista[1][1], lucroBruto: 0 },
+            'terceiro': { armacao: armacoesMaisVendidas_lista[2][0], qtd: armacoesMaisVendidas_lista[2][1], lucroBruto: 0 },
+            'lcBruto': 0
+        }
 
-    armacoes.forEach(keyArmacao => {
-        if (keyArmacao.armacao == armacoesMaisVendidas_lista[0][0]) armacaoMaisVendidas.primeiro.lucroBruto += Number(keyArmacao.valorArm.replace(',', '.'));
-        if (keyArmacao.armacao == armacoesMaisVendidas_lista[1][0]) armacaoMaisVendidas.segundo.lucroBruto += Number(keyArmacao.valorArm.replace(',', '.'));
-        if (keyArmacao.armacao == armacoesMaisVendidas_lista[2][0]) armacaoMaisVendidas.terceiro.lucroBruto += Number(keyArmacao.valorArm.replace(',', '.'));
-        armacaoMaisVendidas.lcBruto += Number(keyArmacao.valorArm.replace(',', '.'));
-    });
+        armacoes.forEach(keyArmacao => {
+            if (keyArmacao.armacao == armacoesMaisVendidas_lista[0][0]) armacaoMaisVendidas.primeiro.lucroBruto += Number(keyArmacao.valorArm.replace(',', '.'));
+            if (keyArmacao.armacao == armacoesMaisVendidas_lista[1][0]) armacaoMaisVendidas.segundo.lucroBruto += Number(keyArmacao.valorArm.replace(',', '.'));
+            if (keyArmacao.armacao == armacoesMaisVendidas_lista[2][0]) armacaoMaisVendidas.terceiro.lucroBruto += Number(keyArmacao.valorArm.replace(',', '.'));
+            armacaoMaisVendidas.lcBruto += Number(keyArmacao.valorArm.replace(',', '.'));
+        });
+    } else {
+        return {
+            'primeiro': { armacao: "N/A", qtd: 0, lucroBruto: 0 },
+            'segundo': { armacao: "N/A", qtd: 0, lucroBruto: 0 },
+            'terceiro': { armacao: "N/A", qtd: 0, lucroBruto: 0 },
+            'lcBruto': 0
+        }
+    }
 
     return armacaoMaisVendidas
 }
