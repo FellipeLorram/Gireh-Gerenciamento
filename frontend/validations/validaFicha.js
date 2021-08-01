@@ -1,21 +1,21 @@
-export default class Ficha{
-    constructor(formBody){
+export default class Ficha {
+    constructor(formBody) {
         this.form = document.querySelector(formBody)
     }
 
-    init(){
+    init() {
         this.eventos()
     }
 
-    eventos(){
-        if(!this.form) return;
+    eventos() {
+        if (!this.form) return;
         this.form.addEventListener('submit', e => {
             e.preventDefault();
             this.valida(e);
         });
     }
 
-    valida(e){
+    valida(e) {
         const el = e.target;
         const nomeInput = el.querySelector('input[name="nome"]');
         const esfOdInput = el.querySelector('input[name="rxEsfOd"]');
@@ -27,48 +27,50 @@ export default class Ficha{
 
         let valido = false;
 
-        if(!nomeInput.value){
+        if (!nomeInput.value) {
             this.criaErro(nomeInput, 'Qual o nome do cliente?');
             valido = true;
         }
+        if (esfOdInput) {
 
-        if(esfOdInput.value) if( esfOdInput.value[0] !== '+' && esfOdInput.value[0] !== '-' ){
-            this.criaErro(esfOdInput, 'positivo ou negativo?');
-            valido = true;
-            esfOdInput.focus()
+            if (esfOdInput.value) if (esfOdInput.value[0] !== '+' && esfOdInput.value[0] !== '-') {
+                this.criaErro(esfOdInput, 'positivo ou negativo?');
+                valido = true;
+                esfOdInput.focus()
+            }
+
+            if (esfOeInput.value) if (esfOeInput.value[0] !== '+' && esfOeInput.value[0] !== '-') {
+                this.criaErro(esfOeInput, 'positivo ou negativo?');
+                valido = true;
+                esfOeInput.focus()
+            }
+
+            if (cilOdInput.value && !eixoOdInput.value) {
+                this.criaErro(eixoOdInput, 'Qual o eixo?');
+                valido = true;
+                eixoOdInput.focus()
+            }
+
+            if (cilOeInput.value && !eixoOeInput.value) {
+                this.criaErro(eixoOeInput, 'Qual o eixo?');
+                valido = true;
+                eixoOeInput.focus()
+            }
+
+            if (eixoOdInput.value && Number(eixoOdInput.value) > 180) {
+                this.criaErro(eixoOdInput, 'Eixo invalido');
+                valido = true;
+                eixoOdInput.focus()
+            }
+
+            if (eixoOeInput.value && Number(eixoOeInput.value) > 180) {
+                this.criaErro(eixoOeInput, 'Eixo invalido');
+                valido = true;
+                eixoOeInput.focus()
+            }
         }
 
-        if(esfOeInput.value) if( esfOeInput.value[0] !== '+' && esfOeInput.value[0] !== '-' ){
-            this.criaErro(esfOeInput, 'positivo ou negativo?');
-            valido = true;
-            esfOeInput.focus()
-        }
-
-        if(cilOdInput.value && !eixoOdInput.value){
-            this.criaErro(eixoOdInput, 'Qual o eixo?');
-            valido = true;
-            eixoOdInput.focus()
-        } 
-
-        if(cilOeInput.value && !eixoOeInput.value){
-            this.criaErro(eixoOeInput, 'Qual o eixo?');
-            valido = true;
-            eixoOeInput.focus()
-        } 
-
-        if(eixoOdInput.value && Number(eixoOdInput.value) > 180 ){
-            this.criaErro(eixoOdInput, 'Eixo invalido');
-            valido = true;
-            eixoOdInput.focus()
-        }
-
-        if(eixoOeInput.value && Number(eixoOeInput.value) > 180 ){
-            this.criaErro(eixoOeInput, 'Eixo invalido');
-            valido = true;
-            eixoOeInput.focus()
-        }
-
-        if(!valido) el.submit();
+        if (!valido) el.submit();
 
     }
 
@@ -83,5 +85,5 @@ export default class Ficha{
         div.innerHTML = msg;
         div.classList.add('error-text');
         campo.insertAdjacentElement('afterend', div);
-      }
+    }
 }

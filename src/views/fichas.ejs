@@ -102,7 +102,8 @@
                         <input value="<%= ficha.idade %>" type="text" class="form-control" name="idade">
                       </div>
                     </div>
-
+                    
+                    <%if(ficha._id){%>
 
                     <div class="mb-3">
                       <label for="anaminese" class="form-label">Anaminese</label>
@@ -240,12 +241,9 @@
                           <option>Atendido</option>
                         </select>
                       </div>
-                      <div class="col">
-                      </div>
-                      <div class="col">
-                      </div>
+    
                     </div>
-
+                    <%}%>
                     <button type="submit" class="btn btn-primary mt-4">Finalizar</button>
 
                 </form>

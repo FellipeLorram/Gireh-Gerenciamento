@@ -235,9 +235,11 @@ if (dataInput) {
 var speedDialContainer = document.querySelector(".speed-dial");
 if (speedDialContainer) {
     var primaryButton = speedDialContainer.querySelector("#btnPrimary");
+    var options = speedDialContainer.querySelector(".speed-dial__options");
 
     primaryButton.addEventListener("click", function (e) {
         e.preventDefault();
+        options.classList.toggle('speed-dial__options_active')
         speedDialContainer.classList.toggle('speed-dial--active')
         /*var classList = "speed-dial";
         var primaryButtonClicked = e.target === primaryButton || primaryButton.contains(e.target);

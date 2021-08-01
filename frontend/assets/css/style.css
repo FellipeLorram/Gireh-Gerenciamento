@@ -328,6 +328,7 @@ nav .navbar .links li:hover .htmlCss-sub-menu, nav .navbar .links li:hover .js-s
   .navbar .nav-links.show2 .links .more-arrow {
     transform: rotate(90deg);
   }
+
 }
 
 @media (max-width:500px) {
@@ -1053,25 +1054,25 @@ label {
   font-family: 'Poppins', sans-serif;
 }
 
-.data_especifica{
+.data_especifica {
   height: 20px;
 }
 
-.data_container{
+.data_container {
   margin-right: 5px;
 }
 
-.data_container:last-of-type{
+.data_container:last-of-type {
   margin-right: 0;
 }
 
-.data_container input{
+.data_container input {
   outline: none;
   border: none;
   overflow: hidden;
   transition: transform 0.1s;
 }
 
-.input_scale{
+.input_scale {
   transform: scale(1.012);
 }
