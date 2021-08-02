@@ -563,34 +563,6 @@ label {
   width: 16rem;
 }
 
-.botao-mais {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  text-decoration: none;
-  background: black;
-  color: #ffffff;
-  display: flex;
-  font-size: 25px;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 2px 2px 5px rgb(0, 0, 0, 0.35);
-  position: fixed;
-  left: -100%;
-  bottom: -100%;
-  z-index: 2;
-  transition: background 0.25s ease-in-out, left 0.25s;
-}
-
-.botao-mais:active {
-  background: #a5a4a4;
-  color: #ffffff;
-}
-
-.botao-mais:hover {
-  background: #a5a4a4;
-  color: #ffffff;
-}
 
 .confirm {
   z-index: 2;
@@ -762,7 +734,7 @@ label {
 }
 
 @media (max-width:800px) {
-  .botao-mais {
+  .speed-dial {
     left: 20px;
     bottom: 20px;
   }
@@ -1095,3 +1067,81 @@ label {
   background-color: rgb(0, 0, 0);
   z-index: 919;
 }
+
+.speed-dial {
+  position: fixed;
+  left: -100%;
+  bottom: -100%;
+  z-index: 2;
+  transition: background 0.25s ease-in-out, left 0.25s;
+}
+
+.speed-dial__options {
+  position: absolute;
+  bottom: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.speed-dial__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  margin-bottom: 15px;
+  background: black;
+  color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  border: none;
+  outline: none;
+  transition: background 0.2s, opacity 0.2s, transform 0.2s;
+}
+
+.speed-dial__button:active {
+  background: #aaaaaa;
+  color: #ffffff;
+}
+
+.speed-dial__button--primary {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-decoration: none;
+  background: black;
+  color: #ffffff;
+  display: flex;
+  font-size: 25px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 5px rgb(0, 0, 0, 0.35);
+}
+
+.speed-dial__button--primary:active {
+  background: #a5a4a4;
+  color: #ffffff;
+  transform: rotate(80deg);
+}
+
+.speed-dial__button:not(.speed-dial__button--primary) {
+  opacity: 0;
+  transform: translateY(40px);
+  visibility: hidden;
+}
+
+.speed-dial--active .speed-dial__button {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+@media (max-width:800px) {
+  .speed-dial {
+    left: 20px;
+    bottom: 20px;
+  }
+}
+

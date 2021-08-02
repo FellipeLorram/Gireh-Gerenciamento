@@ -7,7 +7,7 @@ import cancelwindow from './validations/cancelwindow'
 
 
 //hide All
-const botaoMais = document.querySelector(".botao-mais")
+const botaoMais = document.querySelector(".speed-dial")
 
 const hideAll = document.getElementById('hideAll')
 window.onload = () => {
@@ -273,3 +273,43 @@ if (nRelatorio) nRelatorio.forEach(r => {
         document.querySelector("#focusTo").focus()
     });
 })
+
+
+
+var speedDialContainer = document.querySelector(".speed-dial");
+var primaryButton = speedDialContainer.querySelector(".speed-dial__button--primary");
+
+primaryButton.addEventListener('touchstart', touchStart);
+
+var clickTimer = null;
+
+function touchStart(event) {
+    if (clickTimer == null) {
+        clickTimer = setTimeout(function () {
+
+            clickTimer = null;
+
+            if (speedDialContainer.classList.contains("speed-dial--active")) {
+                speedDialContainer.classList.remove("speed-dial--active");
+                primaryButton.querySelector("i").innerHTML = "add"
+            }
+            else primaryButton.querySelector("a").click();
+
+        }, 500)
+    } else {
+        clearTimeout(clickTimer);
+        clickTimer = null;
+
+        var classList = "speed-dial";
+        var primaryButtonClicked = event.target === primaryButton || primaryButton.contains(event.target);
+        var speedDialIsActive = speedDialContainer.getAttribute("class").indexOf("speed-dial--active") !== -1;
+
+        if (primaryButtonClicked && !speedDialIsActive) {
+            classList += " speed-dial--active";
+        }
+        primaryButton.querySelector("i").innerHTML = "remove"
+        speedDialContainer.setAttribute("class", classList);
+    }
+}
+
+
