@@ -21,9 +21,14 @@ nav {
   width: 100%;
   height: 100%;
   height: 70px;
+  transition: top 0.3s ease-in-out;
   background: #000000;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   z-index: 99;
+}
+
+.hide{
+  top: -100px;
 }
 
 nav .navbar {
@@ -34,7 +39,6 @@ nav .navbar {
   align-items: center;
   justify-content: space-between;
   margin: auto;
-  /* background: red; */
   padding: 0 50px;
 }
 
@@ -575,7 +579,7 @@ label {
   left: -100%;
   bottom: -100%;
   z-index: 2;
-  transition: background 0.25s ease-in-out;
+  transition: background 0.25s ease-in-out, left 0.25s;
 }
 
 .botao-mais:active {

@@ -7,10 +7,34 @@ import cancelwindow from './validations/cancelwindow'
 
 
 //hide All
+const botaoMais = document.querySelector(".botao-mais")
 
 const hideAll = document.getElementById('hideAll')
 window.onload = () => {
     hideAll.remove();
+}
+
+let prevPageYOfsset = window.pageYOffset;
+window.onscroll = () => {
+    let currentPageYOfsset = window.pageYOffset;
+
+    if (prevPageYOfsset > currentPageYOfsset) {
+        if (botaoMais) botaoMais.style.left = "20px"
+        document.getElementById("navBarHide").style.top = "0"
+    }
+    else {
+        if (botaoMais) botaoMais.style.left = "-100%"
+        document.getElementById("navBarHide").style.top = "-100px"
+    }
+    prevPageYOfsset = currentPageYOfsset;
+
+    if (document.getElementById("navBarHide").style.top == "-100px") {
+        setTimeout(() => {
+            if (botaoMais) botaoMais.style.left = "20px"
+            document.getElementById("navBarHide").style.top = "0"
+        }, 1563);
+
+    }
 }
 
 // search-box open close js code
@@ -97,7 +121,7 @@ if (totalInput) {
 
 
     document.addEventListener('change', () => {
-        if(armacaoInput.value == 'Própia') valorArmInput.value = 0.00
+        if (armacaoInput.value == 'Própia') valorArmInput.value = 0.00
 
         if (totalInput.value) {
             if (valorDinInput.value || valorCarInput.value) {
@@ -244,8 +268,8 @@ if (dataInput) {
 }
 
 const nRelatorio = document.querySelectorAll("#newRelatory")
-if(nRelatorio) nRelatorio.forEach(r => {
-    r.addEventListener('click', ()=>{
+if (nRelatorio) nRelatorio.forEach(r => {
+    r.addEventListener('click', () => {
         document.querySelector("#focusTo").focus()
     });
 })
