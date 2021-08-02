@@ -6,6 +6,13 @@ import Ficha from './validations/validaFicha'
 import cancelwindow from './validations/cancelwindow'
 
 
+//hide All
+
+const hideAll = document.getElementById('hideAll')
+window.onload = () => {
+    hideAll.remove();
+}
+
 // search-box open close js code
 let navbar = document.querySelector(".navbar");
 let searchBox = document.querySelector(".search-box .bx-search");

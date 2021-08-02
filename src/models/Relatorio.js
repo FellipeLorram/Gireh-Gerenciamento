@@ -382,6 +382,8 @@ const setLentesMaisVendidas = async (DeData, AteData) => {
     });
 
     if (lentesMaisVendidas_lista.length > 0) {
+        if(!lentesMaisVendidas_lista[1]) lentesMaisVendidas_lista[1] = ["N/A", 0]
+        if(!lentesMaisVendidas_lista[2]) lentesMaisVendidas_lista[2] = ["N/A", 0]
         const lentesMaisVendidas = {
             'primeiro': { lente: lentesMaisVendidas_lista[0][0], qtd: lentesMaisVendidas_lista[0][1], lucroBruto: 0 },
             'segundo': { lente: lentesMaisVendidas_lista[1][0], qtd: lentesMaisVendidas_lista[1][1], lucroBruto: 0 },
@@ -396,6 +398,8 @@ const setLentesMaisVendidas = async (DeData, AteData) => {
             lentesMaisVendidas.lcBruto += Number(keylente.valorLen.replace(',', '.'));
         });
 
+        return lentesMaisVendidas
+
     } else {
         return {
             'primeiro': { lente: "N/A", qtd: 0, lucroBruto: 0 },
@@ -405,7 +409,6 @@ const setLentesMaisVendidas = async (DeData, AteData) => {
         }
     }
 
-    return lentesMaisVendidas
 }
 
 const setArmacaoMaisVendidas = async (DeData, AteData) => {
@@ -444,6 +447,9 @@ const setArmacaoMaisVendidas = async (DeData, AteData) => {
             if (keyArmacao.armacao == armacoesMaisVendidas_lista[2][0]) armacaoMaisVendidas.terceiro.lucroBruto += Number(keyArmacao.valorArm.replace(',', '.'));
             armacaoMaisVendidas.lcBruto += Number(keyArmacao.valorArm.replace(',', '.'));
         });
+
+        return armacaoMaisVendidas
+
     } else {
         return {
             'primeiro': { armacao: "N/A", qtd: 0, lucroBruto: 0 },
@@ -453,5 +459,4 @@ const setArmacaoMaisVendidas = async (DeData, AteData) => {
         }
     }
 
-    return armacaoMaisVendidas
 }
