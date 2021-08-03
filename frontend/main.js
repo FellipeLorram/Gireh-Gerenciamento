@@ -291,7 +291,8 @@ function touchStart(event) {
 
             if (speedDialContainer.classList.contains("speed-dial--active")) {
                 speedDialContainer.classList.remove("speed-dial--active");
-                primaryButton.querySelector("i").innerHTML = "add"
+                //primaryButton.querySelector("i").innerHTML = "add"
+                primaryButton.querySelector("i").classList.remove('icon_rotate');
             }
             else primaryButton.querySelector("a").click();
 
@@ -307,9 +308,16 @@ function touchStart(event) {
         if (primaryButtonClicked && !speedDialIsActive) {
             classList += " speed-dial--active";
         }
-        primaryButton.querySelector("i").innerHTML = "remove"
+        //primaryButton.querySelector("i").innerHTML = "remove"
+        primaryButton.querySelector("i").classList.add('icon_rotate');
         speedDialContainer.setAttribute("class", classList);
     }
 }
 
-
+const speedDialButton = document.querySelectorAll(".speed-dial__button_inside")
+if(speedDialButton) speedDialButton.forEach(btn => {
+    
+    btn.addEventListener('click', () => {
+        btn.querySelector('a').click();
+    })
+});

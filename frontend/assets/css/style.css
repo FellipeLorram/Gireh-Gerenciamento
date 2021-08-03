@@ -1081,6 +1081,7 @@ label {
   bottom: 100%;
   width: 100%;
   text-align: center;
+  transition: transform 0.2s;
 }
 
 .speed-dial__button {
@@ -1092,7 +1093,7 @@ label {
   background: black;
   color: #ffffff;
   border-radius: 50%;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 5px rgb(0, 0, 0, 0.5);
   cursor: pointer;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
@@ -1102,7 +1103,7 @@ label {
 }
 
 .speed-dial__button:active {
-  background: #aaaaaa;
+  background: #a5a4a4;
   color: #ffffff;
 }
 
@@ -1117,13 +1118,20 @@ label {
   font-size: 25px;
   justify-content: center;
   align-items: center;
-  box-shadow: 2px 2px 5px rgb(0, 0, 0, 0.35);
+  box-shadow: 2px 2px 5px rgb(0, 0, 0, 0.5);
 }
 
 .speed-dial__button--primary:active {
   background: #a5a4a4;
   color: #ffffff;
-  transform: rotate(80deg);
+}
+
+.material-icons{
+  transition: transform 0.2s;
+}
+
+.icon_rotate{
+  transform: rotate(45deg) scale(1.2);
 }
 
 .speed-dial__button:not(.speed-dial__button--primary) {
@@ -1137,6 +1145,7 @@ label {
   transform: translateY(0);
   visibility: visible;
 }
+
 
 @media (max-width:800px) {
   .speed-dial {
