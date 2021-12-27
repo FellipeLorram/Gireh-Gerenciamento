@@ -108,10 +108,7 @@ const restaInput = document.querySelector('input[name="resta"]');
 const valorDinInput = document.querySelector('input[name="valorDin"]')
 const valorCarInput = document.querySelector('input[name="valorCar"]')
 
-
 if (totalInput) {
-
-
     totalInput.addEventListener('click', () => {
         if (valorArmInput.value || valorLenInput.value || valorLenContatoInput.value) {
             const desconto = (Number(valorArmInput.value) + Number(valorLenInput.value) + Number(valorLenContatoInput.value)) / 100 * Number(descontoInput.value)
@@ -277,47 +274,49 @@ if (nRelatorio) nRelatorio.forEach(r => {
 
 
 var speedDialContainer = document.querySelector(".speed-dial");
-var primaryButton = speedDialContainer.querySelector(".speed-dial__button--primary");
+if (speedDialContainer) {
+    var primaryButton = speedDialContainer.querySelector(".speed-dial__button--primary");
 
-primaryButton.addEventListener('touchstart', touchStart);
+    primaryButton.addEventListener('touchstart', touchStart);
 
-var clickTimer = null;
+    var clickTimer = null;
 
-function touchStart(event) {
-    if (clickTimer == null) {
-        clickTimer = setTimeout(function () {
+    function touchStart(event) {
+        if (clickTimer == null) {
+            clickTimer = setTimeout(function () {
 
+                clickTimer = null;
+
+                if (speedDialContainer.classList.contains("speed-dial--active")) {
+                    speedDialContainer.classList.remove("speed-dial--active");
+                    //primaryButton.querySelector("i").innerHTML = "add"
+                    primaryButton.querySelector("i").classList.remove('icon_rotate');
+                }
+                else primaryButton.querySelector("a").click();
+
+            }, 500)
+        } else {
+            clearTimeout(clickTimer);
             clickTimer = null;
 
-            if (speedDialContainer.classList.contains("speed-dial--active")) {
-                speedDialContainer.classList.remove("speed-dial--active");
-                //primaryButton.querySelector("i").innerHTML = "add"
-                primaryButton.querySelector("i").classList.remove('icon_rotate');
+            var classList = "speed-dial";
+            var primaryButtonClicked = event.target === primaryButton || primaryButton.contains(event.target);
+            var speedDialIsActive = speedDialContainer.getAttribute("class").indexOf("speed-dial--active") !== -1;
+
+            if (primaryButtonClicked && !speedDialIsActive) {
+                classList += " speed-dial--active";
             }
-            else primaryButton.querySelector("a").click();
-
-        }, 500)
-    } else {
-        clearTimeout(clickTimer);
-        clickTimer = null;
-
-        var classList = "speed-dial";
-        var primaryButtonClicked = event.target === primaryButton || primaryButton.contains(event.target);
-        var speedDialIsActive = speedDialContainer.getAttribute("class").indexOf("speed-dial--active") !== -1;
-
-        if (primaryButtonClicked && !speedDialIsActive) {
-            classList += " speed-dial--active";
+            //primaryButton.querySelector("i").innerHTML = "remove"
+            primaryButton.querySelector("i").classList.add('icon_rotate');
+            speedDialContainer.setAttribute("class", classList);
         }
-        //primaryButton.querySelector("i").innerHTML = "remove"
-        primaryButton.querySelector("i").classList.add('icon_rotate');
-        speedDialContainer.setAttribute("class", classList);
     }
-}
 
-const speedDialButton = document.querySelectorAll(".speed-dial__button_inside")
-if(speedDialButton) speedDialButton.forEach(btn => {
-    
-    btn.addEventListener('click', () => {
-        btn.querySelector('a').click();
-    })
-});
+    const speedDialButton = document.querySelectorAll(".speed-dial__button_inside")
+    if (speedDialButton) speedDialButton.forEach(btn => {
+
+        btn.addEventListener('click', () => {
+            btn.querySelector('a').click();
+        })
+    });
+}

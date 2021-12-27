@@ -260,7 +260,6 @@ Servico.prototype.criaPdf = function () {
         valorEntrada = '';
     }
 
-    // playground requires you to assign document definition to a variable called dd
     var dd = {
         content: [
             {
@@ -351,6 +350,7 @@ Servico.prototype.criaPdf = function () {
                 ],
             },
             '\n\n',
+
             {
                 layout: {
                     defaultBorder: false,
@@ -475,6 +475,7 @@ Servico.prototype.criaPdf = function () {
                     ],
                 },
             },
+            
             '\n',
             {
                 columns: [
@@ -763,7 +764,7 @@ Servico.prototype.criaPdf = function () {
                     widths: [45, 70, 70, 70, 70, 70],
                     heights: [20, 20, 20, 20, 20, 20,],
                     body: [
-                        ['', 'Esferico', 'Cilindrcio', 'Eixo', 'DNP', 'Altura'],
+                        ['', 'Esférico', 'Cilindrico', 'Eixo', 'DNP', 'Altura'],
                         ['OD', `${this.body.esfOd}`, `${this.body.cilOd}`, `${this.body.eixoOd}`, `${this.body.dnpOd}`, `${this.body.alturaOd}`],
                         ['OE', `${this.body.esfOe}`, `${this.body.cilOe}`, `${this.body.eixoOe}`, `${this.body.dnpOe}`, `${this.body.alturaOe}`],
                     ]
